@@ -37,13 +37,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageInformacoesFesta" fitHeight="40.0" fitWidth="40.0" onKeyPressed="#handleInformacoesFesta" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/icone_informacoes.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
             </ImageView>
             <ImageView fx:id="imageDeletarFesta" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#handleDeletarFesta" pickOnBounds="true" preserveRatio="true">
                <image>

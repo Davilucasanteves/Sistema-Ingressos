@@ -3,6 +3,7 @@ package Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class TelaAdministradorController {
@@ -14,7 +15,7 @@ public class TelaAdministradorController {
     private ImageView imageDeletarFesta;
 
     @FXML
-    private ImageView imageEditarFesta;
+    private ImageView imageInformacoesFesta;
 
     @FXML
     private TableColumn<?, ?> tableColunmnIDFesta;
@@ -33,7 +34,7 @@ public class TelaAdministradorController {
     }
 
     @FXML
-    void handleEditarFesta(MouseEvent event) {
+    void handleInformacoesFesta(KeyEvent event) {
 
     }
 
