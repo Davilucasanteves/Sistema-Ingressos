@@ -8,14 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import util.CaminhoArquivo;
 
 public class Principal extends Application {
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(CaminhoArquivo.TELA_INICIAL_SGCI));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaInicialSGCI.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 
