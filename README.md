@@ -2,9 +2,9 @@
 Projeto da disciplina de APII que trata de compra de ingressos para festas.
 
 # Desenvolvedores:
-- Ana Vitória
-- Daví Lucas 
-- Livia Maria
-- Maria Heloísa
-- Yasmim Rocha
+- [Ana Vitória](https://github.com/nanavarges)
+- [Daví Lucas Antunes Neves](https://github.com/Davilucasanteves) 
+- [Lívia Maria](https://github.com/liviamariapr)
+- [Maria Heloísa](https://github.com/helloisasm)
+- [Yasmin Rocha](https://github.com/yasminnrocha)
 
