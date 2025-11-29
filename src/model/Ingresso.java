@@ -4,41 +4,56 @@ import java.io.Serializable;
 
 public class Ingresso implements Serializable {
 
-    private String nomeDaFesta;
-    private int id;
+    private Festa festa;
+    private double valor;
+    private int quantidade;
+    private String tipo;
 
-    public Ingresso() {
+
+    public Ingresso(Festa festa, double valor, int quantidade, String tipo) {
+        this.festa=festa;
+        this.valor=valor;
+        this.quantidade=quantidade;
+        this.tipo=tipo;
     }
 
-    public Ingresso(String nomeDaFesta) {
-        this.nomeDaFesta = nomeDaFesta;
+    public double getValor() {
+        return valor;
     }
 
-    public Ingresso(int id, String nomeDaFesta) {
-        this.nomeDaFesta = nomeDaFesta;
-        this.id = id;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public String getNomeDaFesta() {
-        return nomeDaFesta;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNomeDaFesta(String nomeDaFesta) {
-        this.nomeDaFesta = nomeDaFesta;
+    public Festa getFesta() {
+        return festa;
     }
 
-    public int getId() {
-        return id;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public double calcularTotal(){
+        return valor*quantidade;
+    }
 
     @Override
     public String toString() {
-        return "Nome: " + this.getNomeDaFesta()
-               + "\nId: " + this.getId();
+        return "Festa: "+ this.festa.getNome()
+               +"\nvalor: " + this.getValor()
+               + "\nquantidade: " + this.getQuantidade()
+               + "\ntipo: " + this.getTipo();
     }
 }

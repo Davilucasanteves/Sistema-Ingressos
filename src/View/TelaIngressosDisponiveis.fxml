@@ -43,10 +43,11 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <TableView layoutX="66.0" layoutY="95.0" prefHeight="238.0" prefWidth="467.0" style="-fx-background-color: #d6c2f8;">
+      <TableView layoutX="66.0" layoutY="95.0" prefHeight="238.0" prefWidth="475.0" style="-fx-background-color: #d6c2f8;">
         <columns>
           <TableColumn prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="391.20001525878905" text="Nome da Festa" />
+            <TableColumn maxWidth="4000.0" minWidth="8.0" prefWidth="300.0" text="Nome da Festa" />
+            <TableColumn minWidth="0.0" prefWidth="100.0" text="Quantidade" />
         </columns>
       </TableView>
       <Button layoutX="533.0" layoutY="360.0" mnemonicParsing="false" text="Voltar" />

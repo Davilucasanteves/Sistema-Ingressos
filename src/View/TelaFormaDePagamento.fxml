@@ -64,14 +64,14 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Button layoutX="248.0" layoutY="286.0" mnemonicParsing="false" text="Finalizar Compra" />
-      <Label alignment="CENTER" layoutX="137.0" layoutY="132.0" prefHeight="30.0" style="-fx-background-color: white;" text="Pix" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" />
-      <Label layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorDoIngresso" textAlignment="CENTER">
+      <Button layoutX="248.0" layoutY="300.0" mnemonicParsing="false" text="Finalizar Compra" />
+      <Label alignment="CENTER" layoutX="137.0" layoutY="150.0" prefHeight="30.0" style="-fx-background-color: white;" text="Pix" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" />
+      <Label layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="287.0" layoutY="185.0" prefHeight="30.0" style="-fx-background-color: white;" text="Boleto" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" AnchorPane.topAnchor="180.0" />
-      <Label alignment="CENTER" layoutX="137.0" layoutY="234.0" prefHeight="30.0" style="-fx-background-color: white;" text="Outro" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" AnchorPane.topAnchor="230.0" />
+      <Label alignment="CENTER" layoutX="137.0" layoutY="200.0" prefHeight="30.0" style="-fx-background-color: white;" text="Boleto" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" AnchorPane.topAnchor="200.0" />
+      <Label alignment="CENTER" layoutX="137.0" layoutY="249.0" prefHeight="30.0" style="-fx-background-color: white;" text="Outro" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" AnchorPane.topAnchor="249.0" />
    </children>
 </AnchorPane>
