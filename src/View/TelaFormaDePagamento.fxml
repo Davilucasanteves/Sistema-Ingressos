@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaFormaDePagamento">
+<AnchorPane fx:id="anchorPaneTelaPagamento" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaFormaDePagamento">
    <children>
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="23.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="305.2" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="507.0" AnchorPane.topAnchor="25.0">
          <image>
@@ -64,14 +64,18 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Button fx:id="buttomFinalizar" layoutX="248.0" layoutY="300.0" mnemonicParsing="false" onAction="#realizarCompra" text="Finalizar Compra" />
-      <Label fx:id="labelPix" alignment="CENTER" layoutX="137.0" layoutY="150.0" prefHeight="30.0" style="-fx-background-color: white;" text="Pix" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" />
-      <Label layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER">
+      <Button fx:id="buttomFinalizar" layoutX="252.0" layoutY="304.0" mnemonicParsing="false" onAction="#realizarCompra" text="Finalizar Compra" />
+      <AnchorPane fx:id="anchorPaneMetodosPagamento" layoutX="137.0" layoutY="150.0" prefHeight="130.0" prefWidth="333.0">
+         <children>
+            <Label fx:id="labelPix" alignment="CENTER" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Pix" />
+            <Label fx:id="labelBoleto" alignment="CENTER" layoutY="50.0" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Boleto" />
+            <Label fx:id="labelOutro" alignment="CENTER" layoutY="99.0" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Outro" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="labelValorTotal" layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="labelBoleto" alignment="CENTER" layoutX="137.0" layoutY="200.0" prefHeight="30.0" style="-fx-background-color: white;" text="Boleto" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" AnchorPane.topAnchor="200.0" />
-      <Label fx:id="labelOutro" alignment="CENTER" layoutX="137.0" layoutY="249.0" prefHeight="30.0" style="-fx-background-color: white;" text="Outro" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="136.60000000000002" AnchorPane.topAnchor="249.0" />
    </children>
 </AnchorPane>

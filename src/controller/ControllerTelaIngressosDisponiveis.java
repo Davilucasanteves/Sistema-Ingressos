@@ -95,7 +95,7 @@ public class ControllerTelaIngressosDisponiveis {
     @FXML
     void voltarCliente(ActionEvent event) {
         try{
-                trocarTela(anchorPaneIngressos, "/View/TelaCadastroCliente.fxml");
+                trocarTela(anchorPaneIngressos, "/View/TelaCadastroCliente.fxml");//tem que mudar para Tela Cliente!
         } catch(IOException ex){
             System.err.println("Erro ao tentar voltar: " + ex.getMessage());
                 ex.printStackTrace();

@@ -1,12 +1,24 @@
 package controller;
 
+import java.io.IOException;
+
+import data.RepositorioFesta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import model.Festa;
+import model.IFesta;
+
 
 public class ControllerTelaCompraIngresso {
+
+    @FXML
+    private AnchorPane anchorPaneCompraIngresso;
 
     @FXML
     private TextField TFQuantidade;
@@ -23,14 +35,54 @@ public class ControllerTelaCompraIngresso {
     @FXML
     private Label labelValor;
 
+    private IFesta bancoDeDadosFestas = new RepositorioFesta();
+
+    private Festa festa;
+
+    //private Stage dialogStage;
+
     @FXML
     void irACompra(ActionEvent event) {
+        if (!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) {
+            String novoTipo = this.TFTipo.getText().toUpperCase();
+            int novaQuantidade = Integer.parseInt(this.TFQuantidade.getText());
 
+            this.festa.getIngresso().setTipo(novoTipo);
+            this.festa.getIngresso().setQuantidade(novaQuantidade);
+
+            bancoDeDadosFestas.updateFesta(festa);
+
+            try{
+                trocarTela(anchorPaneCompraIngresso, "/View/TelaFormaDepagamento.fxml");
+            } catch(IOException ex){
+                System.err.println("Erro ao tentar abrir a etapa de pagamento: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+
+            //this.dialogStage.close();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Atenção");
+                alert.setHeaderText("Dados inválidos.");
+                alert.setContentText("Por favor, inclua Tipo e Quantidade válidos.");
+                alert.showAndWait();
+        }
+    }
+
+    private void trocarTela(AnchorPane telaAtual, String caminhoNovaTelaFXML) throws IOException {
+        AnchorPane novaTela = (AnchorPane) FXMLLoader.load(getClass().getResource(caminhoNovaTelaFXML));
+        telaAtual.getChildren().setAll(novaTela);
     }
 
     @FXML
-    void voltaFestas(ActionEvent event) {
-
+    void voltarFestas(ActionEvent event) {
+        try{
+                trocarTela(anchorPaneCompraIngresso, "/View/TelaIngressosDisponiveis.fxml");
+        } catch(IOException ex){
+            System.err.println("Erro ao tentar voltar: " + ex.getMessage());
+                ex.printStackTrace();
+        }
     }
 
 }

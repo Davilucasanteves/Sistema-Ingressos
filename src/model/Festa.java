@@ -24,6 +24,10 @@ public class Festa {
         return id;
     }
 
+    public Ingresso getIngresso(){
+        return ingresso;
+    }
+
     public void setId(int id){
         this.id=id;
     }
