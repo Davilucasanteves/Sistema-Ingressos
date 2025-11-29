@@ -14,14 +14,14 @@ public class Principal extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaInicialSGCI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaCadastroCliente.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 
-            Image imagemIconeDaJanela = new Image("icons/icon_logo.png");
+            Image imagemIconeDaJanela = new Image("/icons/icone_logo.png");
             stage.getIcons().add(imagemIconeDaJanela);// define o icone da janela
-            stage.setTitle("SGCI");
-            stage.setResizable(false);
+            stage.setTitle("SGVI");
+            stage.setResizable(true);
 
             stage.setScene(scene);
             stage.show();
