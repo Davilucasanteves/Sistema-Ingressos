@@ -35,9 +35,20 @@ public class ControllerTelaCompraIngresso {
     @FXML
     private Label labelValor;
 
+     @FXML
+    private Label labelNomeFesta;
+
     private IFesta bancoDeDadosFestas = new RepositorioFesta();
 
     private Festa festa;
+
+    @FXML
+    public void initialize() {
+        if (festa != null) {
+            labelNomeFesta.setText("" + festa.getNome());
+            labelValor.setText(""+ festa.getIngresso().getValor());
+        }
+    }
 
     //private Stage dialogStage;
 
@@ -53,7 +64,7 @@ public class ControllerTelaCompraIngresso {
             bancoDeDadosFestas.updateFesta(festa);
 
             try{
-                trocarTela(anchorPaneCompraIngresso, "/View/TelaFormaDepagamento.fxml");
+                trocarTela(anchorPaneCompraIngresso, "/View/TelaFormaDePagamento.fxml");
             } catch(IOException ex){
                 System.err.println("Erro ao tentar abrir a etapa de pagamento: " + ex.getMessage());
                 ex.printStackTrace();

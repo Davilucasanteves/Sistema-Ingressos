@@ -1,6 +1,8 @@
 package model;
 
-public class Festa {
+import java.io.Serializable;
+
+public class Festa implements Serializable {
     private Ingresso ingresso;
     private String nome, data, descricao;
     private int id;
@@ -12,8 +14,11 @@ public class Festa {
         this.id=id;
     }
 
-    public int getIngressosDisponiveis(){
-        return ingresso.getQuantidade();
+    public int getQuantidade(){
+        if (ingresso != null) {
+            return ingresso.getQuantidade();
+        }
+        return 0;
     }
 
     public String getNome(){
@@ -30,5 +35,9 @@ public class Festa {
 
     public void setId(int id){
         this.id=id;
+    }
+
+    public void setIngresso(Ingresso ingresso){
+        this.ingresso=ingresso;
     }
 }

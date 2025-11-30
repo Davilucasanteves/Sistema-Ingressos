@@ -42,7 +42,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Button fx:id="buttomVoltar" layoutX="533.0" layoutY="360.0" mnemonicParsing="false" onAction="#voltaFestas" text="Voltar" />
+      <Button fx:id="buttomVoltar" layoutX="533.0" layoutY="360.0" mnemonicParsing="false" onAction="#voltarFestas" text="Voltar" />
       <Label layoutX="71.0" layoutY="95.0" prefHeight="27.0" prefWidth="149.0" style="-fx-font-weight: bold;" text="Festa:">
          <font>
             <Font size="18.0" />
@@ -66,13 +66,13 @@
          </opaqueInsets>
       </Label>
       <Button fx:id="buttomComprar" layoutX="269.0" layoutY="287.0" mnemonicParsing="false" onAction="#irACompra" text="Comprar" />
-      <Label layoutX="146.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="nomeDaFesta" textAlignment="CENTER">
+      <Label fx:id="labelNomeFesta" layoutX="146.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="nomeDaFesta" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Label fx:id="labelValor" alignment="CENTER" layoutX="136.0" layoutY="145.0" opacity="0.76" prefHeight="30.0" style="-fx-background-color: white;" text="valor" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="137.60000000000002" AnchorPane.topAnchor="145.0" />
-      <TextField fx:id="TFTipo" alignment="CENTER" layoutX="137.0" layoutY="239.0" prefHeight="30.0" text="Tipo" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.39999999999998" />
-      <TextField fx:id="TFQuantidade" alignment="CENTER" layoutX="225.0" layoutY="192.0" prefHeight="30.0" prefWidth="209.0" text="Quantidade" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" />
+      <TextField fx:id="TFTipo" alignment="CENTER" layoutX="137.0" layoutY="239.0" prefHeight="30.0" promptText="Tipo" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.39999999999998" />
+      <TextField fx:id="TFQuantidade" alignment="CENTER" layoutX="225.0" layoutY="192.0" prefHeight="30.0" prefWidth="209.0" promptText="Quantidade" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" />
    </children>
 </AnchorPane>

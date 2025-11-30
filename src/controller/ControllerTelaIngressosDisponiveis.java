@@ -56,7 +56,7 @@ public class ControllerTelaIngressosDisponiveis {
         //Liga as colunas da tabela (TableColumn) aos atributos (propriedades) dos objetos que estão sendo exibidos.
         columnId.setCellValueFactory(new PropertyValueFactory("id")); //Liga a coluna tableColumnFestaId ao método getId() do objeto Festa.
         columnNome.setCellValueFactory(new PropertyValueFactory("nome")); //Liga a coluna tableColumnFestaNome ao método getNome() do objeto Festa.
-        columnQuantidade.setCellValueFactory(new PropertyValueFactory("quantidade"));
+        columnQuantidade.setCellValueFactory(new PropertyValueFactory("ingressos.quantidade"));
 
         //carregar os dados (lista de Festas) na tabela da interface
         ArrayList<Festa> listaFestas = bancoDeDadosFestas.getAllFestas();
@@ -69,10 +69,8 @@ public class ControllerTelaIngressosDisponiveis {
         try {
             Festa festaSelecionada = tabelaFestas.getSelectionModel().getSelectedItem();
             if (festaSelecionada != null) {
-                // Carrega o arquivo fxml e cria um novo stage para a janela popup.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(ControllerTelaCompraIngresso.class.getResource("/View/TelaCompraIngresso.fxml"));
-                AnchorPane page = (AnchorPane) loader.load();
+                // Carrega o arquivo fxml e troca a tela para a tela de compra de ingresso.
+                trocarTela(anchorPaneIngressos, "/view/TelaCompraIngresso.fxml");
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Atenção");
