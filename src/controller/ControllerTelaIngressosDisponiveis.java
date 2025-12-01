@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,7 +48,7 @@ public class ControllerTelaIngressosDisponiveis {
     private IFesta bancoDeDadosFestas = new RepositorioFesta();
 
     //@Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
         tabelaFestas.setPlaceholder(new Label("Nenhuma Festa cadastrada."));
         carregarTabelaFesta();
     }
@@ -64,10 +65,13 @@ public class ControllerTelaIngressosDisponiveis {
         tabelaFestas.setItems(obsListFesta);
     }
 
+    Festa festaSelecionada;
+
     @FXML
-    void verInfoIngresso(ActionEvent event) {
+    void verInfoIngresso(ActionEvent event) throws IOException{//abrir TelaCompraIngresso
+
         try {
-            Festa festaSelecionada = tabelaFestas.getSelectionModel().getSelectedItem();
+            festaSelecionada = tabelaFestas.getSelectionModel().getSelectedItem();
             if (festaSelecionada != null) {
                 // Carrega o arquivo fxml e troca a tela para a tela de compra de ingresso.
                 trocarTela(anchorPaneIngressos, "/view/TelaCompraIngresso.fxml");
@@ -82,6 +86,15 @@ public class ControllerTelaIngressosDisponiveis {
             System.err.println("Erro ao carregar a Tela CompraIngresso: " + ex.getMessage());
             ex.printStackTrace();
         }
+
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaCompraIngresso.fxml"));
+    Parent root = loader.load();
+
+    // 3. Captura o Controller da nova tela
+    ControllerTelaCompraIngresso controllerNovaTela = loader.getController();
+
+    controllerNovaTela.initialize(festaSelecionada);
+
     }
 
 
@@ -93,7 +106,7 @@ public class ControllerTelaIngressosDisponiveis {
     @FXML
     void voltarCliente(ActionEvent event) {
         try{
-                trocarTela(anchorPaneIngressos, "/view/TelaCadastroCliente.fxml");//tem que mudar para Tela Cliente!
+                trocarTela(anchorPaneIngressos, "/view/TelaCliente.fxml");
         } catch(IOException ex){
             System.err.println("Erro ao tentar voltar: " + ex.getMessage());
                 ex.printStackTrace();

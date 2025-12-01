@@ -40,10 +40,11 @@ public class ControllerTelaCompraIngresso {
 
     private IFesta bancoDeDadosFestas = new RepositorioFesta();
 
-    private Festa festa;
+    private Festa festaSelecionada;
 
     @FXML
-    public void initialize() {
+    public void initialize(Festa festa) {
+        this.festaSelecionada = festa;
         if (festa != null) {
             labelNomeFesta.setText("" + festa.getNome());
             labelValor.setText(""+ festa.getIngresso().getValor());
@@ -58,10 +59,10 @@ public class ControllerTelaCompraIngresso {
             String novoTipo = this.TFTipo.getText().toUpperCase();
             int novaQuantidade = Integer.parseInt(this.TFQuantidade.getText());
 
-            this.festa.getIngresso().setTipo(novoTipo);
-            this.festa.getIngresso().setQuantidade(novaQuantidade);
+            this.festaSelecionada.getIngresso().setTipo(novoTipo);
+            this.festaSelecionada.getIngresso().setQuantidade(novaQuantidade);
 
-            bancoDeDadosFestas.updateFesta(festa);
+            bancoDeDadosFestas.updateFesta(festaSelecionada);
 
             try{
                 trocarTela(anchorPaneCompraIngresso, "/view/TelaFormaDePagamento.fxml");

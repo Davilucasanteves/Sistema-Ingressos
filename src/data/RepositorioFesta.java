@@ -152,12 +152,24 @@ public class RepositorioFesta implements IFesta {
     }
 
     // Metodo auxiliar para descobrir indice(posicao) de um objeto na lista
-    private int getIndiceDoFesta(int id) {
+    public int getIndiceDoFesta(int id) {
         ArrayList<Festa> FestasCadastradas = getAllFestas();
 
         for (int i = 0; i < FestasCadastradas.size(); i++) {
             if (FestasCadastradas.get(i).getId() == id) {
                 return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public double getValorDoIngressoDaFesta(int id) {
+        ArrayList<Festa> FestasCadastradas = getAllFestas();
+
+        for (int i = 0; i < FestasCadastradas.size(); i++) {
+            if (FestasCadastradas.get(i).getId() == id) {
+                return FestasCadastradas.get(i).getIngresso().getValor();
             }
         }
 

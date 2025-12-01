@@ -57,7 +57,7 @@ public class TelaCadastrarFestaController {
 
     @FXML
     void handleButtonSalvarFesta(ActionEvent event) throws Exception{
-        if (!textFieldNome.getText().isEmpty() && !textFieldData.getText().isEmpty() &&!textFieldQtdIngresso.getText().isEmpty() && !textFieldDescricao.getText().isEmpty()){
+        if (!textFieldNome.getText().isEmpty() && !textFieldData.getText().isEmpty() && !textFieldQtdIngresso.getText().isEmpty() && !textFieldDescricao.getText().isEmpty()){
                     String nome = textFieldNome.getText().toUpperCase();
                     String data = textFieldData.getText().toUpperCase();
                     int  qtdIngresso = Integer.parseInt(textFieldQtdIngresso.getText());

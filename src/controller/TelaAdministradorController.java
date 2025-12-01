@@ -54,10 +54,10 @@ public class TelaAdministradorController {
 
     private void carregarTabelaFesta() {
         //Liga as colunas da tabela (TableColumn) aos atributos (propriedades) dos objetos que estão sendo exibidos.
-        tableColunmnIDFesta.setCellValueFactory(new PropertyValueFactory("id")); //Liga a coluna tableColumnDisciplinaId ao método getId() do objeto Disciplina.
+        tableColunmnIDFesta.setCellValueFactory(new PropertyValueFactory("id")); 
         tableColunmnNomeFesta.setCellValueFactory(new PropertyValueFactory("nome"));
 
-        //carregar os dados (lista de disciplinas) na tabela da interface
+        //carregar os dados (lista de festas) na tabela da interface
         ArrayList<Festa> listaFestas = bancoDeDadosFesta.getAllFestas();
         ObservableList<Festa>  obsListFesta = FXCollections.observableArrayList(listaFestas);
         tableFesta.setItems(obsListFesta);
@@ -65,7 +65,7 @@ public class TelaAdministradorController {
 
     @FXML
     void handleCriarFesta(MouseEvent event) throws Exception {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaCadastrarFesta.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaCadastrarFesta.fxml"));
         AnchorPane page = loader.load();
 
         Stage stage = new Stage();
