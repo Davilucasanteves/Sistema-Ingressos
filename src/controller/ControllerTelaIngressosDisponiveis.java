@@ -65,36 +65,40 @@ public class ControllerTelaIngressosDisponiveis {
         tabelaFestas.setItems(obsListFesta);
     }
 
-    Festa festaSelecionada;
-
     @FXML
-    void verInfoIngresso(ActionEvent event) throws IOException{//abrir TelaCompraIngresso
+    void verInfoIngresso(ActionEvent event) throws IOException {
+
+        Festa festaSelecionada = tabelaFestas.getSelectionModel().getSelectedItem();
+        
+        // 1. VALIDAÇÃO: Se nenhuma festa foi selecionada, mostre o alerta e saia.
+        if (festaSelecionada == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Atenção");
+            alert.setHeaderText("Nenhuma Festa foi selecionada.");
+            alert.setContentText("Por favor, selecione uma Festa na tabela para poder ver seu ingresso.");
+            alert.showAndWait();
+            return; // Sai do método
+        }
 
         try {
-            festaSelecionada = tabelaFestas.getSelectionModel().getSelectedItem();
-            if (festaSelecionada != null) {
-                // Carrega o arquivo fxml e troca a tela para a tela de compra de ingresso.
-                trocarTela(anchorPaneIngressos, "/view/TelaCompraIngresso.fxml");
-            } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Atenção");
-                alert.setHeaderText("Nenhuma Festa foi selecionada.");
-                alert.setContentText("Por favor, selecione uma Festa na tabela para poder ver seu ingresso.");
-                alert.showAndWait();
-            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaCompraIngresso.fxml"));
+            Parent root = loader.load(); //root tem o conteúdo da nova tela
+            
+            //Obtendo controller e passando objeto
+            ControllerTelaCompraIngresso controllerNovaTela = loader.getController();
+            controllerNovaTela.setFestaSelecionada(festaSelecionada);
+            
+            trocarConteudo(anchorPaneIngressos, root);
+            
         } catch (IOException ex) {
             System.err.println("Erro ao carregar a Tela CompraIngresso: " + ex.getMessage());
             ex.printStackTrace();
         }
+    }   
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaCompraIngresso.fxml"));
-    Parent root = loader.load();
-
-    // 3. Captura o Controller da nova tela
-    ControllerTelaCompraIngresso controllerNovaTela = loader.getController();
-
-    controllerNovaTela.initialize(festaSelecionada);
-
+    //método para trocar o conteúdo do AnchorPane, aceitando um parent
+    private void trocarConteudo(AnchorPane telaAtual, Parent novoConteudo) {
+        telaAtual.getChildren().setAll(novoConteudo);
     }
 
 
