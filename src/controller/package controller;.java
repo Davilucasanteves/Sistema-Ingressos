@@ -14,48 +14,85 @@ public class FestaController {
     @FXML private TextField txtPreco;
     @FXML private TextArea txtLista;
 
-    FestaCRUD crud = new FestaCRUD();
+    private FestaCRUD crud = new FestaCRUD();
 
-    @FXML
-    void cadastrarFesta(ActionEvent event) {
-        int id = Integer.parseInt(txtIdFesta.getText());
-        String local = txtLocal.getText();
-        String data = txtData.getText();
-        double preco = Double.parseDouble(txtPreco.getText());
-
-        Festa festa = new Festa(id, local, data, preco);
-        crud.cadastrarFesta(festa);
-        listarFestas();
-        limparCampos();
+    
+    private void alerta(String msg){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 
-    @FXML
-    void editarFesta(ActionEvent event) {
-        int id = Integer.parseInt(txtIdFesta.getText());
-        Festa festaAtualizada = new Festa(
-                id,
-                txtLocal.getText(),
-                txtData.getText(),
-                Double.parseDouble(txtPreco.getText())
-        );
-
-        crud.atualizarFesta(id, festaAtualizada);
-        listarFestas();
-        limparCampos();
+    
+    private Integer getId(){
+        try { return Integer.parseInt(txtIdFesta.getText()); }
+        catch(Exception e){ alerta("ID inválido! Digite somente números."); return null; }
     }
 
+    private Double getPreco(){
+        try { return Double.parseDouble(txtPreco.getText()); }
+        catch(Exception e){ alerta("Preço inválido! Digite somente números."); return null; }
+    }
+
+    
+    private boolean camposVazios(){
+        return txtLocal.getText().isBlank() || txtData.getText().isBlank() || txtPreco.getText().isBlank();
+    }
+
+    
     @FXML
-    void excluirFesta(ActionEvent event) {
-        int id = Integer.parseInt(txtIdFesta.getText());
+    void cadastrarFesta(ActionEvent event){
+        if(camposVazios()){ alerta("Preencha todos os campos!"); return; }
+
+        Integer id = getId();
+        Double preco = getPreco();
+        if(id == null || preco == null) return;
+
+       
+        for(Festa f : crud.listarFesta()){
+            if(f.getIdFesta() == id){
+                alerta("Erro: Já existe uma festa com esse ID!");
+                return;
+            }
+        }
+
+        crud.cadastrarFesta(new Festa(id, txtLocal.getText(), txtData.getText(), preco));
+        listarFestas();
+        limparCampos();
+        alerta("Festa cadastrada com sucesso!");
+    }
+
+    
+    @FXML
+    void editarFesta(ActionEvent event){
+        Integer id = getId();
+        Double preco = getPreco();
+        if(id == null || preco == null) return;
+
+        crud.atualizarFesta(id, new Festa(id, txtLocal.getText(), txtData.getText(), preco));
+        listarFestas();
+        limparCampos();
+        alerta("Festa editada com sucesso!");
+    }
+
+    
+    @FXML
+    void excluirFesta(ActionEvent event){
+        Integer id = getId();
+        if(id == null) return;
+
         crud.deletarFesta(id);
         listarFestas();
         limparCampos();
+        alerta("Festa removida com sucesso!");
     }
 
+    
     @FXML
-    void listarFestas() {
+    void listarFestas(){
         txtLista.clear();
-        for (Festa f : crud.listarFesta()) {
+        for(Festa f : crud.listarFesta()){
             txtLista.appendText("ID: " + f.getIdFesta() +
                     " | Local: " + f.getLocal() +
                     " | Data: " + f.getData() +
@@ -63,7 +100,8 @@ public class FestaController {
         }
     }
 
-    void limparCampos() {
+    
+    void limparCampos(){
         txtIdFesta.clear();
         txtLocal.clear();
         txtData.clear();
