@@ -15,7 +15,7 @@ public class Principal extends Application {
     public void start(Stage stage) {
         try {
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaIngressosDisponiveis.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaInicialSGVI.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

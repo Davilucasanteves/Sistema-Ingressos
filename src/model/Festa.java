@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class Festa implements Serializable {
     private Ingresso ingresso;
     private String nome, data, descricao;
-    private int id;
+    private int id, qtdIngresso;
 
-    public Festa(String nome, String data, String descricao, int id){
+    public Festa(String nome, String data, String descricao, int qtdIngresso){
         this.nome=nome;
         this.data=data;
         this.descricao=descricao;
-        this.id=id;
+        this.qtdIngresso= qtdIngresso;
     }
 
     public int getQuantidade(){
@@ -35,6 +35,9 @@ public class Festa implements Serializable {
 
     public String getDescricao(){
         return descricao;
+    }
+    public int getQtdIngresso() {
+        return qtdIngresso;
     }
 
     public Ingresso getIngresso(){

@@ -3,10 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import data.RepositorioAdministrador;
-import data.RepositorioCadastro;
-import data.RepositorioCliente;
-import model.Cliente;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import data.*;
+import model.*;
 
 public class TelaCadastroClienteController {
 
@@ -79,7 +77,7 @@ public class TelaCadastroClienteController {
                     Cliente cliente = new Cliente(nome, cpf, telefone, email, senha);
                     repositorioCliente.createCliente(cliente);
                     repositorioCadastro.createCadastro(cliente);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/telaCliente.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaCliente.fxml"));
                     Parent root = loader.load();
                     Scene novaCena = new Scene(root);
 

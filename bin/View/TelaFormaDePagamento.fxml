@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPaneTelaPagamento" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaFormaDePagamento">
+   <children>
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="23.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="305.2" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="507.0" AnchorPane.topAnchor="25.0">
+         <image>
+            <Image url="@../icons/tickets.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="123.0" layoutY="42.0" prefHeight="35.0" prefWidth="326.0" style="-fx-font-weight: bold;" text="Método de Pagamento">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <effect>
+            <Lighting diffuseConstant="1.36" specularConstant="0.87" surfaceScale="2.6">
+               <bumpInput>
+                  <Glow />
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="41.7">
+                     <color>
+                        <Color red="0.2947368323802948" green="0.2718128561973572" blue="0.2718128561973572" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Button fx:id="buttomVoltar" layoutX="533.0" layoutY="360.0" mnemonicParsing="false" onAction="#voltarInfoIngresso" text="Voltar" AnchorPane.bottomAnchor="14.399999999999999" AnchorPane.rightAnchor="19.0" />
+      <Label layoutX="71.0" layoutY="95.0" prefHeight="27.0" prefWidth="149.0" style="-fx-font-weight: bold;" text="Valor a pagar:">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <Lighting diffuseConstant="1.36" specularConstant="0.87" surfaceScale="2.6">
+               <bumpInput>
+                  <Glow />
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="41.7">
+                     <color>
+                        <Color red="0.2947368323802948" green="0.2718128561973572" blue="0.2718128561973572" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Button fx:id="buttomFinalizar" layoutX="252.0" layoutY="304.0" mnemonicParsing="false" onAction="#realizarCompra" text="Finalizar Compra" />
+      <AnchorPane fx:id="anchorPaneMetodosPagamento" layoutX="137.0" layoutY="150.0" prefHeight="130.0" prefWidth="333.0">
+         <children>
+            <Label fx:id="labelPix" alignment="CENTER" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Pix" />
+            <Label fx:id="labelBoleto" alignment="CENTER" layoutY="50.0" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Boleto" />
+            <Label fx:id="labelOutro" alignment="CENTER" layoutY="99.0" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Outro" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="labelValorTotal" layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
