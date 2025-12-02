@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,6 +47,9 @@ public class TelaAdministradorController {
 
     @FXML
     private TableView<Festa> tableFesta;
+    
+    @FXML
+    private Button buttonSair;
     
     @FXML
     private TextField textFieldPesquisarFesta;
@@ -163,5 +169,26 @@ public class TelaAdministradorController {
             e.printStackTrace();
         }
     }
+       private void abrirTela(String caminhoFXML, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
+        AnchorPane page = loader.load();
 
+        Stage stage = new Stage();
+        stage.setTitle("Sistema");
+        stage.setScene(new Scene(page));
+        stage.show();
+
+        Stage atual = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        atual.close();
+    }
+
+    @FXML
+    void handleVoltar(ActionEvent event) {
+        try {
+            abrirTela("/View/TelaInicialSGVI.fxml", event);
+        } catch (IOException ex) {
+            System.err.println("Erro ao tentar voltar: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
 }
