@@ -76,7 +76,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="buttonVoltar" layoutX="40.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #5a38a3;" text="Voltar" textFill="#110404">
+      <Button fx:id="buttonVoltar" layoutX="40.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #472286;" text="Voltar" textFill="#110404">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

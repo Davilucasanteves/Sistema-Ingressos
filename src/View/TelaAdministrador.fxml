@@ -37,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imageInformacoesFesta" fitHeight="40.0" fitWidth="40.0" onKeyPressed="#handleInformacoesFesta" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageEditarFesta" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#handleEditarFesta" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/icone_informacoes.png" />
                </image>
@@ -56,7 +56,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField prefHeight="25.0" prefWidth="420.0" promptText="Pesquisar festas">
+            <TextField fx:id="textFieldPesquisarFesta" prefHeight="25.0" prefWidth="420.0" promptText="Pesquisar festas">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>

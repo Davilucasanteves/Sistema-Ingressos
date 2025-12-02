@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPaneTelaPagamento" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaFormaDePagamento">
@@ -21,52 +16,8 @@
             <Image url="@../icons/tickets.png" />
          </image>
       </ImageView>
-      <Label layoutX="123.0" layoutY="42.0" prefHeight="35.0" prefWidth="326.0" style="-fx-font-weight: bold;" text="Método de Pagamento">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <effect>
-            <Lighting diffuseConstant="1.36" specularConstant="0.87" surfaceScale="2.6">
-               <bumpInput>
-                  <Glow />
-               </bumpInput>
-               <light>
-                  <Light.Distant azimuth="41.7">
-                     <color>
-                        <Color red="0.2947368323802948" green="0.2718128561973572" blue="0.2718128561973572" />
-                     </color>
-                  </Light.Distant>
-               </light>
-            </Lighting>
-         </effect>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Button fx:id="buttomVoltar" layoutX="533.0" layoutY="360.0" mnemonicParsing="false" onAction="#voltarInfoIngresso" text="Voltar" AnchorPane.bottomAnchor="14.399999999999999" AnchorPane.rightAnchor="19.0" />
-      <Label layoutX="71.0" layoutY="95.0" prefHeight="27.0" prefWidth="149.0" style="-fx-font-weight: bold;" text="Valor a pagar:">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <effect>
-            <Lighting diffuseConstant="1.36" specularConstant="0.87" surfaceScale="2.6">
-               <bumpInput>
-                  <Glow />
-               </bumpInput>
-               <light>
-                  <Light.Distant azimuth="41.7">
-                     <color>
-                        <Color red="0.2947368323802948" green="0.2718128561973572" blue="0.2718128561973572" />
-                     </color>
-                  </Light.Distant>
-               </light>
-            </Lighting>
-         </effect>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Button fx:id="buttomFinalizar" layoutX="252.0" layoutY="304.0" mnemonicParsing="false" onAction="#realizarCompra" text="Finalizar Compra" />
+      <Button fx:id="buttomVoltar" layoutX="533.0" layoutY="360.0" mnemonicParsing="false" onAction="#voltarInfoIngresso" style="-fx-background-color: #472286;" text="Voltar" textFill="#110404" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="25.0" />
+      <Button fx:id="buttomFinalizar" layoutX="252.0" layoutY="304.0" mnemonicParsing="false" onAction="#realizarCompra" style="-fx-background-color: #472286;" text="Finalizar Compra" textFill="#110404" />
       <AnchorPane fx:id="anchorPaneMetodosPagamento" layoutX="137.0" layoutY="150.0" prefHeight="130.0" prefWidth="333.0">
          <children>
             <RadioButton fx:id="radioButtonPix" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="333.0" style="-fx-background-color: white;" text="Pix">
@@ -78,7 +29,17 @@
             <RadioButton fx:id="radioButtonOutro" layoutX="8.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="333.0" style="-fx-background-color: white;" text="Outro" toggleGroup="$metodoPagamentoGroup" />
          </children>
       </AnchorPane>
-      <Label fx:id="labelValorTotal" layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER">
+      <Label fx:id="labelValorTotal" layoutX="168.0" layoutY="100.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="110.0" layoutY="45.0" text="Método de Pagamento" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="105.0" prefHeight="27.0" prefWidth="117.0" text="Valor a pagar:" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="100.0">
          <font>
             <Font size="18.0" />
          </font>

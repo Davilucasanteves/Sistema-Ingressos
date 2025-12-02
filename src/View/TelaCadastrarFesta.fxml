@@ -71,12 +71,6 @@
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Label text="Identificador:" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
-            <TextField fx:id="textFieldIdFesta" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets right="60.0" />
-               </GridPane.margin>
-            </TextField>
          </children>
       </GridPane>
       <Button fx:id="buttonSalvarFesta" layoutX="492.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonSalvarFesta" style="-fx-background-color: #472286;" text="Salvar" textFill="#110404" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="492.0" AnchorPane.topAnchor="330.0">

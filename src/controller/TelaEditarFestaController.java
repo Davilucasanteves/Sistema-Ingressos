@@ -1,12 +1,14 @@
 package controller;
 
+import data.RepositorioFesta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.stage.Stage;
+import model.*;
 public class TelaEditarFestaController {
 
     @FXML
@@ -33,14 +35,55 @@ public class TelaEditarFestaController {
     @FXML
     private TextField textFieldNomeFesta;
 
-    @FXML
-    void handleButtonSalvarFesta(ActionEvent event) {
+    private Stage dialogStage;
+    private Festa festa;
+    private RepositorioFesta bancoDeDadosFesta = new RepositorioFesta();
 
+    @FXML
+    private void handleButtonSalvarFesta(ActionEvent event) {
+        if (!textFieldNomeFesta.getText().isEmpty()
+                && !textFieldDescricao.getText().isEmpty()
+                && !textFieldData.getText().isEmpty()) {
+
+            String novoNome = textFieldNomeFesta.getText().toUpperCase();
+            String novaDescricao = textFieldDescricao.getText();
+            String novaData = textFieldData.getText();
+
+            // Atualiza os dados da festa
+            festa.setNome(novoNome);
+            festa.setDescricao(novaDescricao);
+            festa.setData(novaData);
+
+            bancoDeDadosFesta.updateFesta(festa);
+
+            dialogStage.close();
+
+        } else {
+            labelStatusCadastro.setText("Dados inválidos.");
+            textFieldNomeFesta.requestFocus();
+        }
     }
 
     @FXML
-    void voltarAdm(ActionEvent event) {
-
+    private void voltarAdm(ActionEvent event) {
+        dialogStage.close();
     }
 
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
+    public void setFesta(Festa festa) {
+        this.festa = festa;
+
+        textFieldIdFesta.setText(String.valueOf(festa.getId()));
+        textFieldNomeFesta.setText(festa.getNome());
+        textFieldDescricao.setText(festa.getDescricao());
+        textFieldData.setText(festa.getData());
+    }
+
+    public Festa getFesta() {
+        return festa;
+    }
 }
+
