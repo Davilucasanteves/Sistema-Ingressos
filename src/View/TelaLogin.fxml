@@ -26,7 +26,7 @@
       <VBox alignment="CENTER" layoutX="180.0" layoutY="197.0" prefHeight="179.0" prefWidth="220.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="197.0">
          <children>
       
-            <Label fx:id="labelAcessoInvalido" prefHeight="17.0" prefWidth="4.0" />
+            <Label fx:id="labelAcessoInvalido" prefHeight="17.0" prefWidth="213.0" textFill="#110404" />
             <TextField fx:id="textFieldEmail" onAction="#handleDigitarEmail" prefHeight="19.0" prefWidth="220.0" promptText="Email">
                <cursor>
                   <Cursor fx:constant="TEXT" />
@@ -45,7 +45,7 @@
             </TextField>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="220.0">
                <children>
-                  <Button fx:id="buttonVoltar" alignment="CENTER" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #d6c2f8;" text="Voltar">
+                  <Button fx:id="buttonVoltar" alignment="CENTER" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #d6c2f8;" text="Voltar" textFill="#110404">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -53,7 +53,7 @@
                         <Insets right="25.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttonAcessar" alignment="CENTER" mnemonicParsing="false" onAction="#handleAcessarApp" style="-fx-background-color: #d6c2f8;" text="Acessar">
+                  <Button fx:id="buttonAcessar" alignment="CENTER" mnemonicParsing="false" onAction="#handleAcessarApp" style="-fx-background-color: #d6c2f8;" text="Acessar" textFill="#110404">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

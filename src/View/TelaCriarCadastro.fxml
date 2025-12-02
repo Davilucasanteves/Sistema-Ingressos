@@ -40,10 +40,10 @@
                   </Button>
                </children>
             </VBox>
-            <Label layoutX="7.0" layoutY="171.0" prefHeight="17.0" prefWidth="277.0" text="Escolha o tipo de cadastro que combina com voce:" textFill="WHITE" />
+            <Label layoutX="7.0" layoutY="171.0" prefHeight="17.0" prefWidth="277.0" text="Escolha o tipo de cadastro que combina com você:" textFill="#110404" />
          </children>
       </AnchorPane>
-      <Button fx:id="buttonVoltar" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #d6c2f8;" text="Voltar">
+      <Button fx:id="buttonVoltar" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #d6c2f8;" text="Voltar" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="25.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
