@@ -5,7 +5,7 @@ public class Meia extends Ingresso {
 
     public Meia(double valor, int quantidade, String tipo) {
         super(valor, quantidade, tipo);
-        super.setTipo("Meia");
+        super.setTipo("MEIA");
     }
 
     public double getDesconto() {

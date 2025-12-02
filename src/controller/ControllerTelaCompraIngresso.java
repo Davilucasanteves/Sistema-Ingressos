@@ -12,8 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import model.Festa;
-import model.IFesta;
+import model.*;
 
 
 public class ControllerTelaCompraIngresso {
@@ -67,31 +66,37 @@ public class ControllerTelaCompraIngresso {
 }
 
     @FXML
-    void irACompra(ActionEvent event) throws IOException{
-        if ((!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) && (TFTipo.getText().equalsIgnoreCase("MEIA") || TFTipo.getText().equalsIgnoreCase("INTEIRA"))) {
+    void irACompra(ActionEvent event) throws IOException {
+        if ((!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) 
+            && (TFTipo.getText().equalsIgnoreCase("MEIA") || TFTipo.getText().equalsIgnoreCase("INTEIRA"))) {
+            
             String novoTipo = this.TFTipo.getText().toUpperCase();
             int novaQuantidade = Integer.parseInt(this.TFQuantidade.getText());
-
-            this.festaSelecionada.getIngresso().setTipo(novoTipo);
-            this.festaSelecionada.getIngresso().setQuantidade(novaQuantidade);
-
+            double valorAtual = this.festaSelecionada.getIngresso().getValor();
+            if ("MEIA".equalsIgnoreCase(novoTipo)) {
+                Meia meiaIngresso = new Meia(valorAtual, novaQuantidade, novoTipo);
+                this.festaSelecionada.setIngresso(meiaIngresso);
+            } else if ("INTEIRA".equalsIgnoreCase(novoTipo)) {
+                Inteira inteiraIngresso = new Inteira(valorAtual, novaQuantidade, novoTipo);
+                this.festaSelecionada.setIngresso(inteiraIngresso);
+            }
+            
             bancoDeDadosFestas.updateFesta(festaSelecionada);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaFormaDePagamento.fxml"));
             Parent root = loader.load(); 
 
             ControllerTelaFormaDePagamento controllerPagamento = loader.getController();
-
             controllerPagamento.setFesta(festaSelecionada);
 
             trocarConteudo(anchorPaneCompraIngresso, root);
 
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Atenção");
-                alert.setHeaderText("Dados inválidos.");
-                alert.setContentText("Por favor, inclua Tipo(MEIA ou INTEIRA) e Quantidade(menor ou igual aos disponíveis) válidos.");
-                alert.showAndWait();
+            alert.setTitle("Atenção");
+            alert.setHeaderText("Dados inválidos.");
+            alert.setContentText("Por favor, inclua Tipo(MEIA ou INTEIRA) e Quantidade(menor ou igual aos disponíveis) válidos.");
+            alert.showAndWait();
         }
     }
 

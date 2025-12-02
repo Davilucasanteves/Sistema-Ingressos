@@ -102,6 +102,12 @@ public class ControllerTelaFormaDePagamento {
             alert.setContentText("Pagamento processado com sucesso via " + metodo + ".");
         }
         alert.showAndWait();
+        try {
+            trocarTela(anchorPaneTelaPagamento, "/View/TelaCliente.fxml");
+        } catch (IOException ex) {
+            System.err.println("Erro ao ir para tela do cliente. " + ex.getMessage());
+            ex.printStackTrace();
+        }
         
     }
 
