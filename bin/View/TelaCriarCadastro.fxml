@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #472286;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaCriarCadastroController">
    <children>
       <ImageView fitHeight="407.0" fitWidth="622.0" layoutX="-5.0" layoutY="-6.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
@@ -19,30 +18,35 @@
       </ImageView>
       <AnchorPane layoutX="173.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="129.0" fitWidth="121.0" layoutX="55.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="129.0" fitWidth="121.0" layoutX="72.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/icone_addusuario.png" />
                </image>
             </ImageView>
-            <VBox alignment="CENTER" layoutX="46.0" layoutY="188.0" prefHeight="91.0" prefWidth="108.0">
+            <VBox alignment="CENTER" layoutY="188.0" prefHeight="91.0" prefWidth="277.0">
                <children>
-                  <Button fx:id="buttonCriarNovoCliente" mnemonicParsing="false" onAction="#handleButtonCriarNovoCliente" style="-fx-background-color: #d6c2f8;" text="Cliente">
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button fx:id="buttonCriarNovoAdministrador" mnemonicParsing="false" onAction="#handleButtonCriarNovoAdministrador" style="-fx-background-color: #d6c2f8;" text="Administrador">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button fx:id="buttonCriarNovoCliente" mnemonicParsing="false" onAction="#handleButtonCriarNovoCliente" style="-fx-background-color: #d6c2f8;" text="Cliente">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
-            <Label layoutX="-33.0" layoutY="171.0" prefHeight="17.0" prefWidth="290.0" text="Escolha o tipo de cadastro que combina com voce:" textFill="WHITE" />
+            <Label layoutX="7.0" layoutY="171.0" prefHeight="17.0" prefWidth="277.0" text="Escolha o tipo de cadastro que combina com voce:" textFill="WHITE" />
          </children>
       </AnchorPane>
+      <Button fx:id="buttonVoltar" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleVoltar" style="-fx-background-color: #d6c2f8;" text="Voltar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

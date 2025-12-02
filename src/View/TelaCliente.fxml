@@ -26,7 +26,7 @@
       </Label>
       <HBox alignment="CENTER" layoutY="109.0" prefHeight="50.0" prefWidth="600.0">
          <children>
-            <ImageView fx:id="imageVerIngressosAVenda" fitHeight="40.0" fitWidth="40.0" onKeyPressed="#handleVerIngressosAVenda" onMouseClicked="#handleCriarFesta" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageVerIngressosAVenda" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#handleVerIngressosAVenda" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/icone_carrinhodecompras.png" />
                </image>

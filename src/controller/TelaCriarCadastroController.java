@@ -46,5 +46,19 @@ public class TelaCriarCadastroController {
         atual.close();
 
     }
+    @FXML
+    void handleVoltar(ActionEvent event) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaInicialSGVI.fxml"));
+        AnchorPane page = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Sistema");
+        stage.setScene(new Scene(page));
+        stage.show();
+        
+        Stage atual = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        atual.close();
+
+    }
 
 }

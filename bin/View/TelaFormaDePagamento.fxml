@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneTelaPagamento" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaFormaDePagamento">
+<AnchorPane fx:id="anchorPaneTelaPagamento" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaFormaDePagamento">
    <children>
       <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="23.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="305.2" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="507.0" AnchorPane.topAnchor="25.0">
          <image>
@@ -67,9 +69,13 @@
       <Button fx:id="buttomFinalizar" layoutX="252.0" layoutY="304.0" mnemonicParsing="false" onAction="#realizarCompra" text="Finalizar Compra" />
       <AnchorPane fx:id="anchorPaneMetodosPagamento" layoutX="137.0" layoutY="150.0" prefHeight="130.0" prefWidth="333.0">
          <children>
-            <Label fx:id="labelPix" alignment="CENTER" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Pix" />
-            <Label fx:id="labelBoleto" alignment="CENTER" layoutY="50.0" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Boleto" />
-            <Label fx:id="labelOutro" alignment="CENTER" layoutY="99.0" prefHeight="30.0" prefWidth="334.0" style="-fx-background-color: white;" text="Outro" />
+            <RadioButton fx:id="radioButtonPix" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="333.0" style="-fx-background-color: white;" text="Pix">
+               <toggleGroup>
+                  <ToggleGroup fx:id="metodoPagamentoGroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radioButtonBoleto" layoutX="8.0" layoutY="61.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="333.0" style="-fx-background-color: white;" text="Boleto" toggleGroup="$metodoPagamentoGroup" />
+            <RadioButton fx:id="radioButtonOutro" layoutX="8.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="333.0" style="-fx-background-color: white;" text="Outro" toggleGroup="$metodoPagamentoGroup" />
          </children>
       </AnchorPane>
       <Label fx:id="labelValorTotal" layoutX="212.0" layoutY="95.0" prefHeight="18.0" prefWidth="132.0" text="valorTotal" textAlignment="CENTER">
