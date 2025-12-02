@@ -94,4 +94,14 @@ public class TelaLoginController {
         atual.close();
     }
 
+    @FXML
+    void handleVoltar(ActionEvent event) throws Exception{
+        try{
+                abrirTela( "/view/TelaInicialSGVI.fxml");
+        } catch(IOException ex){
+            System.err.println("Erro ao tentar voltar: " + ex.getMessage());
+                ex.printStackTrace();
+        }
+    }
+
 }
