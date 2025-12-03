@@ -134,16 +134,6 @@ public class TelaClienteController {
     }
 
     @FXML
-    void handleimageDeletarFesta(MouseEvent event) {
-
-    }
-
-    @FXML
-    void handleimageInformacoesIngressos(MouseEvent event) {
-
-    }
-
-    @FXML
     void handleSair(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaInicialSGVI.fxml"));
         Parent root = loader.load();

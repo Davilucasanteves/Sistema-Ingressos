@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,9 @@ public class TelaAdministradorController {
     private Button buttomSair;
 
     @FXML
+    private TextField textFieldPesquisaAdm;
+
+    @FXML
     private TableColumn<?, ?> tableColunmnIDFesta;
 
     @FXML
@@ -54,6 +58,40 @@ public class TelaAdministradorController {
     public void initialize() {
         tableFesta.setPlaceholder(new Label("Nenhuma Festa cadastrada."));
         carregarTabelaFesta();
+        configurarPesquisa();
+    }
+
+    private void configurarPesquisa() {
+        // Listener para o TextField de pesquisa
+        if (textFieldPesquisaAdm != null) {
+            textFieldPesquisaAdm.textProperty().addListener((observable, oldValue, newValue) -> {
+                filtrarTabela(newValue);
+            });
+        }
+    }
+
+    private void filtrarTabela(String textoPesquisa) {
+        ArrayList<Festa> listaFestas = bancoDeDadosFesta.getAllFestas();
+        ArrayList<Festa> festaFiltrada = new ArrayList<>();
+
+        if (textoPesquisa == null || textoPesquisa.isEmpty()) {
+            // aplicar filtro padrão de quantidade > 0
+            for (Festa f : listaFestas) {
+                if (f.getQuantidade() > 0) {
+                    festaFiltrada.add(f);
+                }
+            }
+        } else {
+            String textoLower = textoPesquisa.toLowerCase();
+            for (Festa f : listaFestas) {
+                if (f.getQuantidade() > 0 && f.getNome().toLowerCase().contains(textoLower)) {
+                    festaFiltrada.add(f);
+                }
+            }
+        }
+
+        ObservableList<Festa> obsListFesta = FXCollections.observableArrayList(festaFiltrada);
+        tableFesta.setItems(obsListFesta);
     }
 
     private void carregarTabelaFesta() {
