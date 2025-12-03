@@ -69,16 +69,15 @@ public class ControllerTelaFormaDePagamento {
             return;
         }
 
-        String tipo= festa.getIngresso().getTipo();
-        double valorCalculado= 0;
-        
+        double valorUnitario = festa.getIngresso().getValor();
+        double valorCalculado = 0;
         
         if ("MEIA".equalsIgnoreCase(tipoIngressoSelecionado)) {
-            valorCalculado = meia.getValor() * meia.getDesconto() * this.quantidadeComprando;
+            valorCalculado = (valorUnitario * 0.5) * this.quantidadeComprando;
         } else if ("INTEIRA".equalsIgnoreCase(tipoIngressoSelecionado)) {
-            valorCalculado = inteira.getValor() * this.quantidadeComprando;
+            valorCalculado = valorUnitario * this.quantidadeComprando;
         } else {
-            valorCalculado = festa.getIngresso().getValor() * this.quantidadeComprando; 
+            valorCalculado = valorUnitario * this.quantidadeComprando; 
         }
         
         labelValorTotal.setText(String.format("R$ %.2f", valorCalculado));

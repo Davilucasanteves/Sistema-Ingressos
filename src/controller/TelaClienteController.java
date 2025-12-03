@@ -16,7 +16,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +38,9 @@ public class TelaClienteController {
 
     @FXML
     private ImageView imageVerIngressosAVenda;
+
+    @FXML
+    private TextField textFieldPesquisa;
 
     @FXML
     private TableColumn<Compra, Integer> tableColunmnIDFesta;
@@ -58,6 +63,35 @@ public class TelaClienteController {
     @FXML
     public void initialize() {
         carregarTabelaCompras();
+        configurarPesquisa();
+    }
+
+    private void configurarPesquisa() {
+        // Listener para o TextField de pesquisa
+        textFieldPesquisa.textProperty().addListener((observable, oldValue, newValue) -> {
+            filtrarTabela(newValue);
+        });
+    }
+
+    private void filtrarTabela(String textoPesquisa) {
+        RepositorioCompra repositorioCompra = new RepositorioCompra();
+        ArrayList<Compra> compras = repositorioCompra.getAllCompras();
+        
+        ObservableList<Compra> comprasFiltradas = FXCollections.observableArrayList();
+        
+        if (textoPesquisa == null || textoPesquisa.isEmpty()) {
+            comprasFiltradas.addAll(compras);
+        } else {
+            //Filtra por nome da festa
+            String textoLower = textoPesquisa.toLowerCase();
+            for (Compra compra : compras) {
+                if (compra.getFestaNome().toLowerCase().contains(textoLower)) {
+                    comprasFiltradas.add(compra);
+                }
+            }
+        }
+        
+        tableFesta.setItems(comprasFiltradas);
     }
 
     private void carregarTabelaCompras() {
@@ -84,6 +118,10 @@ public class TelaClienteController {
         Stage stage = new Stage();
         stage.setTitle("Ingressos Disponíveis");
         stage.setScene(new Scene(page));
+        
+        // Adiciona a logo da janela
+        Image imagemIconeDaJanela = new Image("/icons/icone_logo.png");
+        stage.getIcons().add(imagemIconeDaJanela);
         
         // Quando a janela fechar, recarrega a tabela de compras
         stage.setOnHidden(e -> carregarTabelaCompras());
@@ -113,6 +151,11 @@ public class TelaClienteController {
         Stage stage = new Stage();
         stage.setTitle("Sistema de Ingressos");
         stage.setScene(new Scene(root));
+        
+        // Adiciona a logo da janela
+        Image imagemIconeDaJanela = new Image("/icons/icone_logo.png");
+        stage.getIcons().add(imagemIconeDaJanela);
+        
         stage.show();
         
         // Fecha a tela de administrador
