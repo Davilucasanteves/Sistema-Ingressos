@@ -8,7 +8,7 @@ public class Compra implements Serializable {
     private String festaNome;
     private int quantidade;
     private double valorTotal;
-    private String tipo; // MEIA ou INTEIRA
+    private String tipo;
 
     public Compra(int festId, String festaNome, int quantidade, double valorTotal, String tipo) {
         this.festId = festId;

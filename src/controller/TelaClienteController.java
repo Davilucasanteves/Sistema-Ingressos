@@ -61,7 +61,6 @@ public class TelaClienteController {
     }
 
     private void carregarTabelaCompras() {
-        // Configurar as colunas da tabela
         tableColunmnIDFesta.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColunmnNomeFesta.setCellValueFactory(new PropertyValueFactory<>("festaNome"));
         tableColunmnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
