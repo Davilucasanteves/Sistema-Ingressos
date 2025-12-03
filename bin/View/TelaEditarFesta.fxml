@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneCadastraFesta" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaCadastrarFestaController">
+<AnchorPane fx:id="anchorPaneEditarFesta" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaEditarFestaController">
    <children>
-      <Label layoutX="109.0" layoutY="53.0" text="Cadastrar Festa" AnchorPane.leftAnchor="120.0">
+      <Label layoutX="109.0" layoutY="53.0" text="Editar Festa" AnchorPane.leftAnchor="120.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -57,7 +57,7 @@
             </TextField>
             <Label text="Descricao:" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
             <Label text="Quantidade de Ingressos" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-            <Label layoutX="362.0" layoutY="96.0" text=" Valor dos Ingressoss" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label layoutX="362.0" layoutY="96.0" text=" Valor dos Ingressos" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="textFieldValorDoIngresso" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="30.0" />
@@ -65,11 +65,11 @@
             </TextField>
          </children>
       </GridPane>
-      <Button fx:id="buttonSalvarFesta" layoutX="454.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleButtonSalvarFesta" style="-fx-background-color: #472286;" text="Salvar" textFill="#110404" AnchorPane.bottomAnchor="28.19999999999999" AnchorPane.leftAnchor="454.0" AnchorPane.topAnchor="347.0">
+      <Button fx:id="buttonSalvarAlteracoes" layoutX="454.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleButtonSalvarAlteracoes" style="-fx-background-color: #472286;" text="Salvar" textFill="#110404" AnchorPane.bottomAnchor="28.19999999999999" AnchorPane.leftAnchor="454.0" AnchorPane.topAnchor="347.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label fx:id="labelStatusCadastro" layoutX="48.0" layoutY="342.0" />
+      <Label fx:id="labelStatusEdicao" layoutX="48.0" layoutY="342.0" />
       <Button fx:id="buttomVoltar" layoutX="526.0" layoutY="347.0" mnemonicParsing="false" onAction="#voltarAdm" text="Voltar" />
    </children>
 </AnchorPane>
