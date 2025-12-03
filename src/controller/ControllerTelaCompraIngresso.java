@@ -6,7 +6,6 @@ import data.RepositorioFesta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,31 +43,19 @@ public class ControllerTelaCompraIngresso {
     private Festa festaSelecionada;
 
     @FXML
-    public void initialize() {//initialize não pode ter parâmetro
-        
-    }
-
-    public void setFestaSelecionada(Festa festa) {
+    public void initialize(Festa festa) {
         this.festaSelecionada = festa;
-        this.atualizarComponentesDeFesta(); 
+        if (festa != null) {
+            labelNomeFesta.setText("" + festa.getNome());
+            labelValor.setText(""+ festa.getIngresso().getValor());
+        }
     }
 
-    private void atualizarComponentesDeFesta() {
-        if (this.festaSelecionada != null) {
-            
-            labelNomeFesta.setText("" + this.festaSelecionada.getNome() + "");
-            
-            if (this.festaSelecionada.getIngresso() != null) {
-                labelValor.setText("R$ " + this.festaSelecionada.getIngresso().getValor());
-            } else {
-                labelValor.setText("Valor não definido.");
-            }
-        }
-}
+    //private Stage dialogStage;
 
     @FXML
-    void irACompra(ActionEvent event) throws IOException{
-        if ((!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) && (TFTipo.getText().equalsIgnoreCase("MEIA") || TFTipo.getText().equalsIgnoreCase("INTEIRA"))) {
+    void irACompra(ActionEvent event) {
+        if (!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) {
             String novoTipo = this.TFTipo.getText().toUpperCase();
             int novaQuantidade = Integer.parseInt(this.TFQuantidade.getText());
 
@@ -77,26 +64,22 @@ public class ControllerTelaCompraIngresso {
 
             bancoDeDadosFestas.updateFesta(festaSelecionada);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaFormaDePagamento.fxml"));
-            Parent root = loader.load(); 
+            try{
+                trocarTela(anchorPaneCompraIngresso, "/view/TelaFormaDePagamento.fxml");
+            } catch(IOException ex){
+                System.err.println("Erro ao tentar abrir a etapa de pagamento: " + ex.getMessage());
+                ex.printStackTrace();
+            }
 
-            ControllerTelaFormaDePagamento controllerPagamento = loader.getController();
-
-            controllerPagamento.setFesta(festaSelecionada);
-
-            trocarConteudo(anchorPaneCompraIngresso, root);
+            //this.dialogStage.close();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Atenção");
                 alert.setHeaderText("Dados inválidos.");
-                alert.setContentText("Por favor, inclua Tipo(MEIA ou INTEIRA) e Quantidade(menor ou igual aos disponíveis) válidos.");
+                alert.setContentText("Por favor, inclua Tipo e Quantidade válidos.");
                 alert.showAndWait();
         }
-    }
-
-    private void trocarConteudo(AnchorPane telaAtual, Parent novoConteudo) {
-        telaAtual.getChildren().setAll(novoConteudo);
     }
 
     private void trocarTela(AnchorPane telaAtual, String caminhoNovaTelaFXML) throws IOException {

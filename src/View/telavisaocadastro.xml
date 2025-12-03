@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="380" prefWidth="600" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FestaController">
+
+    <children>
+        <Label layoutX="20" layoutY="10" text="Cadastro de Festa"/>
+
+        <Label layoutX="20" layoutY="50" text="Id Festa:"/>
+        <TextField fx:id="txtIdFesta" layoutX="100" layoutY="45"/>
+
+        <Label layoutX="20" layoutY="90" text="Local:"/>
+        <TextField fx:id="txtLocal" layoutX="100" layoutY="85"/>
+
+        <Label layoutX="20" layoutY="130" text="Data:"/>
+        <TextField fx:id="txtData" layoutX="100" layoutY="125"/>
+
+        <Label layoutX="20" layoutY="170" text="Preço:"/>
+        <TextField fx:id="txtPreco" layoutX="100" layoutY="165"/>
+
+        <Button text="Cadastrar" layoutX="20" layoutY="210" onAction="#cadastrarFesta"/>
+        <Button text="Editar" layoutX="110" layoutY="210" onAction="#editarFesta"/>
+        <Button text="Excluir" layoutX="180" layoutY="210" onAction="#excluirFesta"/>
+        <Button text="Listar" layoutX="260" layoutY="210" onAction="#listarFestas"/>
+
+        <TextArea fx:id="txtLista" layoutX="20" layoutY="250" prefHeight="110" prefWidth="560"/>
+    </children>
+
+</AnchorPane>

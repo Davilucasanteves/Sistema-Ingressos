@@ -10,11 +10,8 @@ public class Ingresso implements Serializable {
     private String tipo;
 
 
-    public Ingresso() {
-      
-    }
-
-    public Ingresso(double valor, int quantidade, String tipo) {
+    public Ingresso(Festa festa, double valor, int quantidade, String tipo) {
+        this.festa=festa;
         this.valor=valor;
         this.quantidade=quantidade;
         this.tipo=tipo;

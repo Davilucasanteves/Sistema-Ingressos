@@ -16,26 +16,20 @@ import model.IFesta;
 
 public class RepositorioFesta implements IFesta {
 
-    private final String ARQUIVO_FestaS = "Festa.ser";
-    private final String ARQUIVO_ID_FestaS = "idFesta.dat";
+    private final String ARQUIVO_Festas = "Festa.ser";
+    private final String ARQUIVO_ID_Festas = "idFesta.dat";
 
     public RepositorioFesta() {
-        ArrayList<Festa> listaVaziaDeFestas = new ArrayList<>();
-        File arquivoFestas = new File(ARQUIVO_FestaS);
+        ArrayList<Festa> listaVazia = new ArrayList<>();
+        File arquivoFestas = new File(ARQUIVO_Festas);
 
-        // Se o arquivo "Festa.ser" ainda não existir cria um novo e escreve uma
-        // lista vazia
         if (!arquivoFestas.exists()) {
             try {
-
                 arquivoFestas.createNewFile();
-
-                try (ObjectOutputStream escritorDeDados = new ObjectOutputStream(new FileOutputStream(ARQUIVO_FestaS))){
-                    escritorDeDados.writeObject(listaVaziaDeFestas);
+                try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ARQUIVO_Festas))){
+                    out.writeObject(listaVazia);
                 }
-
             } catch (IOException e) {
-                System.err.println("Erro ao criar arquivo de Festas!" + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -43,162 +37,151 @@ public class RepositorioFesta implements IFesta {
 
     @Override
     public ArrayList<Festa> getAllFestas() {
-        ArrayList<Festa> FestasCadastradas = new ArrayList<>();
+        ArrayList<Festa> festas = new ArrayList<>();
 
-        // Lê e retorna a lista de Festas armazenada no arquivo
-        try (ObjectInputStream leitorDeObjetos = new ObjectInputStream(new FileInputStream(ARQUIVO_FestaS))) {
-
-            FestasCadastradas = (ArrayList<Festa>) leitorDeObjetos.readObject();
-
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(ARQUIVO_Festas))) {
+            festas = (ArrayList<Festa>) in.readObject();
         } catch (Exception e) {
-            System.err.println("Erro no metodo getAllFestas: " + e.getMessage());
             e.printStackTrace();
         }
+        return festas;
+    }
 
-        return FestasCadastradas;
+    public ArrayList<Festa> getFestasPorAdmin(String cpfAdmin) {
+        ArrayList<Festa> todas = getAllFestas();
+        ArrayList<Festa> filtradas = new ArrayList<>();
+
+        for (Festa f : todas) {
+            if (f.getAdminCpf() != null && f.getAdminCpf().equals(cpfAdmin)) {
+                filtradas.add(f);
+            }
+        }
+        return filtradas;
     }
 
     private int gerarNovoIdParaFesta() {
-        File arquivoDeIds = new File(ARQUIVO_ID_FestaS);
+        File arquivoDeIds = new File(ARQUIVO_ID_Festas);
         int idInicial = 1;
         int novoId = 0;
         int ultimoIdCadastrado = 0;
 
         try {
-            // Se o arquivo nao existir, cria um novo, grava e retorna o id inicial
             if (!arquivoDeIds.exists()) {
                 arquivoDeIds.createNewFile();
                 gravarNovoId(idInicial, arquivoDeIds);
                 return idInicial;
             }
 
-            // Se o arquivo existir, le o ultimo id, incrementa, grava e retorna seu valor
             ultimoIdCadastrado = lerUltimoIdCadastrado(arquivoDeIds);
             novoId = ultimoIdCadastrado + 1;
 
             gravarNovoId(novoId, arquivoDeIds);
 
         } catch (Exception e) {
-            System.err.println("Erro no metodo gerarNovoIdParaFesta: " + e.getMessage());
             e.printStackTrace();
         }
         return novoId;
     }
 
     private int lerUltimoIdCadastrado(File arquivoDeIds) throws IOException {
-        int ultimoIdCadastrado;
-
-        try (DataInputStream leitorDeDados = new DataInputStream(new FileInputStream(arquivoDeIds))) {
-            ultimoIdCadastrado = leitorDeDados.readInt();
+        try (DataInputStream in = new DataInputStream(new FileInputStream(arquivoDeIds))) {
+            return in.readInt();
         }
-
-        return ultimoIdCadastrado;
     }
 
     private void gravarNovoId(int novoId, File arquivoDeIds) throws FileNotFoundException, IOException {
-
-        try (DataOutputStream escritorDeDados = new DataOutputStream(new FileOutputStream(arquivoDeIds))) {
-
-            escritorDeDados.writeInt(novoId);
+        try (DataOutputStream out = new DataOutputStream(new FileOutputStream(arquivoDeIds))) {
+            out.writeInt(novoId);
         }
     }
 
-    private void atualizarArquivoFesta(ArrayList<Festa> FestasCadastradas) {
-
-        try (ObjectOutputStream escritorDeObjetos = new ObjectOutputStream(new FileOutputStream(ARQUIVO_FestaS))) {
-
-            escritorDeObjetos.writeObject(FestasCadastradas);
-
+    private void atualizarArquivoFesta(ArrayList<Festa> festas) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ARQUIVO_Festas))) {
+            out.writeObject(festas);
         } catch (Exception e) {
-            System.err.println("Erro no método atualizarArquivoFesta: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
-    public void createFesta(Festa Festa) {
-        Festa.setId(gerarNovoIdParaFesta());
+    public void createFesta(Festa festa) {
+        festa.setId(gerarNovoIdParaFesta());
 
-        ArrayList<Festa> FestasCadastrados = getAllFestas();
-        FestasCadastrados.add(Festa);
+        ArrayList<Festa> lista = getAllFestas();
+        lista.add(festa);
 
-        atualizarArquivoFesta(FestasCadastrados);
+        atualizarArquivoFesta(lista);
     }
 
     @Override
     public Festa readFesta(String nome) {
-        ArrayList<Festa> FestasCadastradas = getAllFestas();
+        ArrayList<Festa> lista = getAllFestas();
 
-        for (Festa f : FestasCadastradas) {
-            if ( nome.equals(f.getNome())) {
+        for (Festa f : lista) {
+            if (nome.equals(f.getNome())) {
                 return f;
             }
         }
-
         return null;
     }
 
     @Override
     public Festa readFestaPorId(int id) {
-        ArrayList<Festa> festasCadastradas = getAllFestas();
+        ArrayList<Festa> lista = getAllFestas();
 
-        for (Festa f : festasCadastradas) {
+        for (Festa f : lista) {
             if (id == f.getId()) {
                 return f;
             }
         }
-
         return null;
     }
 
-    // Metodo auxiliar para descobrir indice(posicao) de um objeto na lista
     public int getIndiceDoFesta(int id) {
-        ArrayList<Festa> FestasCadastradas = getAllFestas();
+        ArrayList<Festa> lista = getAllFestas();
 
-        for (int i = 0; i < FestasCadastradas.size(); i++) {
-            if (FestasCadastradas.get(i).getId() == id) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == id) {
                 return i;
             }
         }
-
         return -1;
     }
 
     public double getValorDoIngressoDaFesta(int id) {
-        ArrayList<Festa> FestasCadastradas = getAllFestas();
+        ArrayList<Festa> lista = getAllFestas();
 
-        for (int i = 0; i < FestasCadastradas.size(); i++) {
-            if (FestasCadastradas.get(i).getId() == id) {
-                return FestasCadastradas.get(i).getIngresso().getValor();
+        for (Festa f : lista) {
+            if (f.getId() == id) {
+                return f.getIngresso().getValor();
             }
         }
-
         return -1;
     }
 
     @Override
-    public void updateFesta(Festa Festa) {
-        ArrayList<Festa> FestasCadastradas = getAllFestas();
-        int indiceDaFesta = getIndiceDoFesta(Festa.getId());
+    public void updateFesta(Festa festa) {
+        ArrayList<Festa> lista = getAllFestas();
+        int indice = getIndiceDoFesta(festa.getId());
 
-        if (indiceDaFesta == -1) {
+        if (indice == -1) {
             throw new RuntimeException("Festa não encontrada.");
         }
 
-        FestasCadastradas.set(indiceDaFesta, Festa);
-        atualizarArquivoFesta(FestasCadastradas);
+        lista.set(indice, festa);
+        atualizarArquivoFesta(lista);
     }
 
     @Override
-    public void deleteFesta(Festa Festa) {
-        ArrayList<Festa> FestasCadastradas = getAllFestas();
-        int indiceDaFesta = this.getIndiceDoFesta(Festa.getId());
+    public void deleteFesta(Festa festa) {
+        ArrayList<Festa> lista = getAllFestas();
+        int indice = getIndiceDoFesta(festa.getId());
 
-        if (indiceDaFesta == -1) {
+        if (indice == -1) {
             throw new RuntimeException("Festa não encontrada.");
         }
 
-        FestasCadastradas.remove(indiceDaFesta);
-        atualizarArquivoFesta(FestasCadastradas);
+        lista.remove(indice);
+        atualizarArquivoFesta(lista);
     }
 }
