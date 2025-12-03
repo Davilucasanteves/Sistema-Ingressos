@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -26,7 +27,7 @@
       </Label>
       <HBox alignment="CENTER" layoutY="109.0" prefHeight="50.0" prefWidth="600.0">
          <children>
-            <ImageView fx:id="imageVerIngressosAVenda" fitHeight="40.0" fitWidth="40.0" onKeyPressed="#handleVerIngressosAVenda" onMouseClicked="#handleCriarFesta" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageVerIngressosAVenda" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#handleVerIngressosAVenda" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/icone_carrinhodecompras.png" />
                </image>
@@ -37,26 +38,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="imageInformacoesIngressos" fitHeight="40.0" fitWidth="40.0" onKeyPressed="#handleimageInformacoesIngressos" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/icone_informacoes.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView fx:id="imageDeletarFesta" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#handleimageDeletarFesta" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/icone_apagar.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <TextField prefHeight="25.0" prefWidth="420.0" promptText="Pesquisar festas">
+            <TextField fx:id="textFieldPesquisa" prefHeight="25.0" prefWidth="420.0" promptText="Pesquisar festas">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
@@ -66,11 +48,15 @@
             </TextField>
          </children>
       </HBox>
-      <TableView layoutY="172.0" prefHeight="230.0" prefWidth="600.0" style="-fx-background-color: #fafafa;">
+      <TableView fx:id="tableFesta" layoutY="172.0" prefHeight="230.0" prefWidth="600.0" style="-fx-background-color: #fafafa;">
         <columns>
-          <TableColumn fx:id="tableColunmnIDFesta" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="tableColunmnNomeFesta" prefWidth="524.0" text="Ingressos" />
+          <TableColumn fx:id="tableColunmnIDFesta" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="tableColunmnNomeFesta" prefWidth="200.0" text="Festa" />
+          <TableColumn fx:id="tableColunmnQuantidade" prefWidth="100.0" text="Quantidade" />
+          <TableColumn fx:id="tableColunmnTipo" prefWidth="100.0" text="Tipo" />
+          <TableColumn fx:id="tableColunmnValor" prefWidth="150.0" text="Valor Total" />
         </columns>
       </TableView>
+      <Button fx:id="buttomSair" layoutX="536.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleSair" text="Sair" />
    </children>
 </AnchorPane>

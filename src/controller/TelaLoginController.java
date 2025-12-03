@@ -2,8 +2,12 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import data.RepositorioCadastro;
+import model.Administrador;
+import model.Cadastro;
+import model.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +15,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Administrador;
-import model.Cadastro;
-import model.Cliente;
+import data.*;
 
 public class TelaLoginController {
     
@@ -87,12 +88,20 @@ public class TelaLoginController {
         Stage stage = new Stage();
         stage.setTitle("Sistema");
         stage.setScene(new Scene(page));
-        Image imagemIconeDaJanela = new Image("/icons/icone_logo.png");
-        stage.getIcons().add(imagemIconeDaJanela);
         stage.show();
 
         Stage atual = (Stage) buttonAcessar.getScene().getWindow();
         atual.close();
+    }
+
+    @FXML
+    void handleVoltar(ActionEvent event) throws Exception{
+        try{
+                abrirTela( "/View/TelaInicialSGVI.fxml");
+        } catch(IOException ex){
+            System.err.println("Erro ao tentar voltar: " + ex.getMessage());
+                ex.printStackTrace();
+        }
     }
 
 }
