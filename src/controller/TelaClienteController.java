@@ -3,7 +3,11 @@ package controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import data.RepositorioCompra;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +16,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Compra;
 
 public class TelaClienteController {
 
@@ -32,17 +38,42 @@ public class TelaClienteController {
     private ImageView imageVerIngressosAVenda;
 
     @FXML
-    private TableColumn<?, ?> tableColunmnIDFesta;
+    private TableColumn<Compra, Integer> tableColunmnIDFesta;
 
     @FXML
-    private TableColumn<?, ?> tableColunmnNomeFesta;
+    private TableColumn<Compra, String> tableColunmnNomeFesta;
 
     @FXML
-    private TableView<?> tableFesta;
+    private TableColumn<Compra, Integer> tableColunmnQuantidade;
+
+    @FXML
+    private TableColumn<Compra, String> tableColunmnTipo;
+
+    @FXML
+    private TableColumn<Compra, Double> tableColunmnValor;
+
+    @FXML
+    private TableView<Compra> tableFesta;
 
     @FXML
     public void initialize() {
-        // Inicialização da tela de cliente
+        carregarTabelaCompras();
+    }
+
+    private void carregarTabelaCompras() {
+        // Configurar as colunas da tabela
+        tableColunmnIDFesta.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableColunmnNomeFesta.setCellValueFactory(new PropertyValueFactory<>("festaNome"));
+        tableColunmnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        tableColunmnTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        tableColunmnValor.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+
+        // Carregar compras do repositório
+        RepositorioCompra repositorioCompra = new RepositorioCompra();
+        ArrayList<Compra> compras = repositorioCompra.getAllCompras();
+        
+        ObservableList<Compra> observableCompras = FXCollections.observableArrayList(compras);
+        tableFesta.setItems(observableCompras);
     }
 
 

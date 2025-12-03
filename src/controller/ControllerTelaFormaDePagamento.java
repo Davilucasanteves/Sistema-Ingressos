@@ -47,12 +47,16 @@ public class ControllerTelaFormaDePagamento {
     private AnchorPane anchorPaneMetodosPagamento;
 
     private Festa festa;
+    private String tipoIngressoSelecionado;
+    private Meia meia = new Meia(1,1,"tipo");
+    private Inteira inteira = new Inteira(1,1,"tipo");
     private int quantidadeComprando = 0;  // Quantidade de ingressos que o usuário deseja comprar
     private IFesta bancoDeDadosFestas = new RepositorioFesta();
 
-    public void setFesta(Festa festa, int quantidadeComprando) {
+    public void setFesta(Festa festa, int quantidadeComprando, String tipoIngressoSelecionado) {
         this.festa = festa;
         this.quantidadeComprando = quantidadeComprando;
+        this.tipoIngressoSelecionado = tipoIngressoSelecionado;
         this.atualizarValorTotal(); 
     }
 
@@ -66,12 +70,10 @@ public class ControllerTelaFormaDePagamento {
         double valorCalculado= 0;
         
         
-        if ("MEIA".equalsIgnoreCase(tipo) && festa.getIngresso() instanceof Meia) {
-            Meia meiaIngresso = (Meia) festa.getIngresso();
-            valorCalculado = meiaIngresso.getValor() * this.quantidadeComprando;
-        } else if ("INTEIRA".equalsIgnoreCase(tipo) && festa.getIngresso() instanceof Inteira) {
-            Inteira inteiraIngresso = (Inteira) festa.getIngresso();
-            valorCalculado = inteiraIngresso.getValor() * this.quantidadeComprando;
+        if ("MEIA".equalsIgnoreCase(tipoIngressoSelecionado)) {
+            valorCalculado = meia.getValor() * meia.getDesconto() * this.quantidadeComprando;
+        } else if ("INTEIRA".equalsIgnoreCase(tipoIngressoSelecionado)) {
+            valorCalculado = inteira.getValor() * this.quantidadeComprando;
         } else {
             valorCalculado = festa.getIngresso().getValor() * this.quantidadeComprando; 
         }

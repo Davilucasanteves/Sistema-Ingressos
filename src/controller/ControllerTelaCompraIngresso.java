@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.Festa;
@@ -25,7 +26,10 @@ public class ControllerTelaCompraIngresso {
     private TextField TFQuantidade;
 
     @FXML
-    private TextField TFTipo;
+    private RadioButton radioButtonMeia;
+
+    @FXML
+    private RadioButton radioButtonInteira;
 
     @FXML
     private Button buttomComprar;
@@ -69,8 +73,8 @@ public class ControllerTelaCompraIngresso {
 
     @FXML
     void irACompra(ActionEvent event) throws IOException{
-        if ((!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) && (TFTipo.getText().equalsIgnoreCase("MEIA") || TFTipo.getText().equalsIgnoreCase("INTEIRA"))) {
-            String novoTipo = this.TFTipo.getText().toUpperCase();
+        if ((!this.TFQuantidade.getText().isEmpty()) && (radioButtonMeia.isSelected() || radioButtonInteira.isSelected())) {
+            String novoTipo = this.radioButtonMeia.getText().toUpperCase();
             int quantidadeDesejada = Integer.parseInt(this.TFQuantidade.getText());
             
             // Verifica se a quantidade desejada não excede a quantidade disponível
@@ -96,7 +100,9 @@ public class ControllerTelaCompraIngresso {
 
             ControllerTelaFormaDePagamento controllerPagamento = loader.getController();
 
-            controllerPagamento.setFesta(festaSelecionada, this.quantidadeComprando);
+            String tipoIngressoSelecionado = getTipoIngressoSelecionado();
+
+            controllerPagamento.setFesta(festaSelecionada, this.quantidadeComprando, tipoIngressoSelecionado);
 
             trocarConteudo(anchorPaneCompraIngresso, root);
 
@@ -107,6 +113,15 @@ public class ControllerTelaCompraIngresso {
                 alert.setContentText("Por favor, inclua Tipo(MEIA ou INTEIRA) e Quantidade(menor ou igual aos disponíveis) válidos.");
                 alert.showAndWait();
         }
+    }
+
+    public String getTipoIngressoSelecionado() {
+        if (radioButtonMeia.isSelected()) {
+            return "MEIA";
+        } else if (radioButtonInteira.isSelected()) {
+            return "INTEIRA";
+        }
+        return "padrao";
     }
 
     private void trocarConteudo(AnchorPane telaAtual, Parent novoConteudo) {
