@@ -7,8 +7,8 @@ public class Inteira extends Ingresso {
         super.setTipo("Inteira");
     }
 
-    @Override
-    public double calcularTotal() {
-        return getValor() * getQuantidade();
-    }
+    // @Override
+    // public double calcularTotal() {
+    //     return getValor() * getQuantidade();
+    // }
 }
