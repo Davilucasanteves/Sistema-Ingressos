@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="anchorPaneEditarFesta" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaEditarFestaController">
    <children>
-      <Label layoutX="109.0" layoutY="53.0" text="Editar Festa" AnchorPane.leftAnchor="120.0">
+      <Label layoutX="109.0" layoutY="53.0" text="Editar Festa" AnchorPane.leftAnchor="110.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -71,12 +71,12 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label fx:id="labelStatusEdicao" layoutX="48.0" layoutY="342.0" />
-      <Button fx:id="buttomVoltar" layoutX="74.0" layoutY="347.0" mnemonicParsing="false" onAction="#voltarAdm" style="-fx-background-color: #472286;" text="Voltar" textFill="#110404" />
-      <ImageView fitHeight="81.0" fitWidth="104.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="labelStatusEdicao" layoutX="128.0" layoutY="351.0" prefHeight="17.0" prefWidth="321.0" />
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
          <image>
-            <Image url="@../../../../Sistema-Ingressos/src/icons/tickets.png" />
+            <Image url="@../icons/tickets.png" />
          </image>
       </ImageView>
+      <Button fx:id="buttomVoltar" layoutX="60.0" layoutY="347.0" mnemonicParsing="false" onAction="#voltarAdm" text="Voltar" />
    </children>
 </AnchorPane>

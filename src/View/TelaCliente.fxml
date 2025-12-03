@@ -38,7 +38,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField fx:id="textFieldPesquisa" prefHeight="25.0" prefWidth="420.0" promptText="Pesquisar festas">
+            <TextField fx:id="textFieldPesquisa" prefHeight="25.0" prefWidth="420.0" promptText="Pesquisar ingresso">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
