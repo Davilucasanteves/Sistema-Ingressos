@@ -42,6 +42,7 @@ public class ControllerTelaCompraIngresso {
     private IFesta bancoDeDadosFestas = new RepositorioFesta();
 
     private Festa festaSelecionada;
+    private int quantidadeComprando = 0;  // Armazena a quantidade que o usuário deseja comprar
 
     @FXML
     public void initialize() {//initialize não pode ter parâmetro
@@ -70,19 +71,32 @@ public class ControllerTelaCompraIngresso {
     void irACompra(ActionEvent event) throws IOException{
         if ((!this.TFQuantidade.getText().isEmpty() && !TFTipo.getText().isEmpty()) && (TFTipo.getText().equalsIgnoreCase("MEIA") || TFTipo.getText().equalsIgnoreCase("INTEIRA"))) {
             String novoTipo = this.TFTipo.getText().toUpperCase();
-            int novaQuantidade = Integer.parseInt(this.TFQuantidade.getText());
+            int quantidadeDesejada = Integer.parseInt(this.TFQuantidade.getText());
+            
+            // Verifica se a quantidade desejada não excede a quantidade disponível
+            if (quantidadeDesejada > this.festaSelecionada.getQuantidade()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Atenção");
+                alert.setHeaderText("Quantidade insuficiente.");
+                alert.setContentText("Não há " + quantidadeDesejada + " ingressos disponíveis. Máximo disponível: " + this.festaSelecionada.getQuantidade());
+                alert.showAndWait();
+                return;
+            }
+            
+            // Armazena a quantidade que será comprada
+            this.quantidadeComprando = quantidadeDesejada;
 
+            // Atualiza apenas o tipo do ingresso (não a quantidade total)
             this.festaSelecionada.getIngresso().setTipo(novoTipo);
-            this.festaSelecionada.getIngresso().setQuantidade(novaQuantidade);
-
-            bancoDeDadosFestas.updateFesta(festaSelecionada);
+            
+            // NÃO atualizamos a quantidade total aqui, apenas passamos para o próximo controller
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaFormaDePagamento.fxml"));
             Parent root = loader.load(); 
 
             ControllerTelaFormaDePagamento controllerPagamento = loader.getController();
 
-            controllerPagamento.setFesta(festaSelecionada);
+            controllerPagamento.setFesta(festaSelecionada, this.quantidadeComprando);
 
             trocarConteudo(anchorPaneCompraIngresso, root);
 

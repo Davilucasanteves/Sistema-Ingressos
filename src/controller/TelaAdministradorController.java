@@ -1,28 +1,28 @@
 package controller;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
+import data.RepositorioFesta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Festa;
 import model.IFesta;
-import data.*;
 
 public class TelaAdministradorController {
 
@@ -36,6 +36,9 @@ public class TelaAdministradorController {
 
     @FXML
     private ImageView imageInformacoesFesta;
+
+    @FXML
+    private Button buttomSair;
 
     @FXML
     private TableColumn<?, ?> tableColunmnIDFesta;
@@ -79,11 +82,86 @@ public class TelaAdministradorController {
 
     @FXML
     void handleDeletarFesta(MouseEvent event) {
-
+        Festa festaSelecionada = tableFesta.getSelectionModel().getSelectedItem();
+        
+        if (festaSelecionada == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Atenção");
+            alert.setHeaderText("Nenhuma festa foi selecionada.");
+            alert.setContentText("Por favor, selecione uma festa na tabela para deletá-la.");
+            alert.showAndWait();
+            return;
+        }
+        
+        // Confirma a deleção
+        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacao.setTitle("Confirmar Deleção");
+        confirmacao.setHeaderText("Tem certeza que deseja deletar essa festa?");
+        confirmacao.setContentText("Festa: " + festaSelecionada.getNome() + "\nEsta ação não pode ser desfeita.");
+        
+        if (confirmacao.showAndWait().isPresent() && confirmacao.getResult().getText().equalsIgnoreCase("OK")) {
+            // Deleta a festa do repositório
+            bancoDeDadosFesta.deleteFesta(festaSelecionada);
+            
+            // Atualiza a tabela
+            carregarTabelaFesta();
+            
+            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+            sucesso.setTitle("Sucesso");
+            sucesso.setHeaderText("Festa deletada com sucesso!");
+            sucesso.setContentText("A festa foi removida do sistema.");
+            sucesso.showAndWait();
+        }
     }
 
     @FXML
-    void handleInformacoesFesta(KeyEvent event) {
+    void handleInformacoesFesta(MouseEvent event) {
+        Festa festaSelecionada = tableFesta.getSelectionModel().getSelectedItem();
+        
+        if (festaSelecionada == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Atenção");
+            alert.setHeaderText("Nenhuma festa foi selecionada.");
+            alert.setContentText("Por favor, selecione uma festa na tabela para editá-la.");
+            alert.showAndWait();
+            return;
+        }
+        
+        abrirTelaEditar(festaSelecionada);
+    }
+    
+    private void abrirTelaEditar(Festa festa) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaEditarFesta.fxml"));
+            Parent root = loader.load();
+            
+            TelaEditarFestaController controller = loader.getController();
+            controller.setFestaEmEdicao(festa);
+            
+            Stage stage = new Stage();
+            stage.setTitle("Editar Festa");
+            stage.setScene(new Scene(root));
+            stage.setOnHidden(e -> carregarTabelaFesta()); // Recarrega tabela quando fechar
+            stage.show();
+            
+        } catch (IOException ex) {
+            System.err.println("Erro ao abrir tela de edição: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
 
+    @FXML
+    void handleSair(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TelaInicialSGVI.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        stage.setTitle("Sistema de Ingressos");
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+        // Fecha a tela de administrador
+        Stage atual = (Stage) buttomSair.getScene().getWindow();
+        atual.close();
     }
 }
