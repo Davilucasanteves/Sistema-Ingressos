@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import data.RepositorioCompra;
 import data.RepositorioFesta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import model.Compra;
 import model.Festa;
 import model.IFesta;
 import model.Inteira;
@@ -52,6 +54,7 @@ public class ControllerTelaFormaDePagamento {
     private Inteira inteira = new Inteira(1,1,"tipo");
     private int quantidadeComprando = 0;  // Quantidade de ingressos que o usuário deseja comprar
     private IFesta bancoDeDadosFestas = new RepositorioFesta();
+    private RepositorioCompra repositorioCompra = new RepositorioCompra();
 
     public void setFesta(Festa festa, int quantidadeComprando, String tipoIngressoSelecionado) {
         this.festa = festa;
@@ -97,17 +100,37 @@ public class ControllerTelaFormaDePagamento {
         RadioButton selectedRadioButton = (RadioButton) metodoPagamentoGroup.getSelectedToggle();
         String metodo = selectedRadioButton.getText(); 
         
-        if (festa.getQuantidade()>= quantidadeComprando) {
+        if (festa.getQuantidade() >= quantidadeComprando) {
             int novaQuantidadeDisponivel = festa.getQuantidade() - quantidadeComprando;
             festa.getIngresso().setQuantidade(novaQuantidadeDisponivel);
             
             bancoDeDadosFestas.updateFesta(festa);
-        }else{
+            
+            // Calcular valor total da compra
+            double valorTotal = 0;
+            if ("MEIA".equalsIgnoreCase(tipoIngressoSelecionado)) {
+                valorTotal = (festa.getIngresso().getValor() * 0.5) * quantidadeComprando;
+            } else if ("INTEIRA".equalsIgnoreCase(tipoIngressoSelecionado)) {
+                valorTotal = festa.getIngresso().getValor() * quantidadeComprando;
+            }
+            
+            // Criar e salvar a compra
+            Compra novaCompra = new Compra(
+                festa.getId(),
+                festa.getNome(),
+                quantidadeComprando,
+                valorTotal,
+                tipoIngressoSelecionado
+            );
+            repositorioCompra.createCompra(novaCompra);
+            
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Você quis ingressos demais!");
             alert.setHeaderText("Pagamento cancelado!");
+            alert.showAndWait();
+            return;
         }
-        
         
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Sucesso");

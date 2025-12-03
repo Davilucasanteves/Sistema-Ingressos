@@ -84,6 +84,10 @@ public class TelaClienteController {
         Stage stage = new Stage();
         stage.setTitle("Ingressos Disponíveis");
         stage.setScene(new Scene(page));
+        
+        // Quando a janela fechar, recarrega a tabela de compras
+        stage.setOnHidden(e -> carregarTabelaCompras());
+        
         stage.show();
         
         // Fecha a tela de cliente
