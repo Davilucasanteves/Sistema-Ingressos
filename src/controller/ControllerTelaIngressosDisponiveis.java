@@ -61,7 +61,16 @@ public class ControllerTelaIngressosDisponiveis {
 
         //carregar os dados (lista de Festas) na tabela da interface
         ArrayList<Festa> listaFestas = bancoDeDadosFestas.getAllFestas();
-        ObservableList<Festa> obsListFesta = FXCollections.observableArrayList(listaFestas);
+        
+        // Filtrar apenas festas com quantidade > 0
+        ArrayList<Festa> festaDisponivel = new ArrayList<>();
+        for (Festa festa : listaFestas) {
+            if (festa.getQuantidade() > 0) {
+                festaDisponivel.add(festa);
+            }
+        }
+        
+        ObservableList<Festa> obsListFesta = FXCollections.observableArrayList(festaDisponivel);
         tabelaFestas.setItems(obsListFesta);
     }
 
