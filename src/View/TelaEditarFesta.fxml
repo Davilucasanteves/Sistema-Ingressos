@@ -5,20 +5,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneEditarFesta" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaEditarFestaController">
+<AnchorPane fx:id="anchorPaneEditarFesta" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #d6c2f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaEditarFestaController">
    <children>
       <Label layoutX="109.0" layoutY="53.0" text="Editar Festa" AnchorPane.leftAnchor="120.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <GridPane layoutX="40.0" layoutY="95.0" prefHeight="206.0" prefWidth="516.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="95.0">
+      <GridPane layoutX="74.0" layoutY="109.0" prefHeight="206.0" prefWidth="516.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="109.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.0" minWidth="10.0" prefWidth="352.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="0.0" prefWidth="148.0" />
@@ -65,11 +67,16 @@
             </TextField>
          </children>
       </GridPane>
-      <Button fx:id="buttonSalvarAlteracoes" layoutX="454.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleButtonSalvarAlteracoes" style="-fx-background-color: #472286;" text="Salvar" textFill="#110404" AnchorPane.bottomAnchor="28.19999999999999" AnchorPane.leftAnchor="454.0" AnchorPane.topAnchor="347.0">
+      <Button fx:id="buttonSalvarAlteracoes" layoutX="493.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleButtonSalvarAlteracoes" style="-fx-background-color: #472286;" text="Salvar" textFill="#110404" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="493.0" AnchorPane.topAnchor="347.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <Label fx:id="labelStatusEdicao" layoutX="48.0" layoutY="342.0" />
-      <Button fx:id="buttomVoltar" layoutX="526.0" layoutY="347.0" mnemonicParsing="false" onAction="#voltarAdm" text="Voltar" />
+      <Button fx:id="buttomVoltar" layoutX="74.0" layoutY="347.0" mnemonicParsing="false" onAction="#voltarAdm" style="-fx-background-color: #472286;" text="Voltar" textFill="#110404" />
+      <ImageView fitHeight="81.0" fitWidth="104.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Sistema-Ingressos/src/icons/tickets.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
