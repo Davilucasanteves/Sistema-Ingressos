@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import data.*;
 import model.*;
@@ -104,28 +102,4 @@ public class TelaCadastroAdministradorController {
                 labelStatusCadastro.setText("Dados inválidos");
         }
     }
-    
-    private void abrirTela(String caminhoFXML, ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
-        AnchorPane page = loader.load();
-
-        Stage stage = new Stage();
-        stage.setTitle("Sistema");
-        stage.setScene(new Scene(page));
-        stage.show();
-
-        Stage atual = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        atual.close();
-    }
-
-    @FXML
-    void handleVoltar(ActionEvent event) {
-        try {
-            abrirTela("/view/TelaCriarCadastro.fxml", event);
-        } catch (IOException ex) {
-            System.err.println("Erro ao tentar voltar: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-    }
-
 }

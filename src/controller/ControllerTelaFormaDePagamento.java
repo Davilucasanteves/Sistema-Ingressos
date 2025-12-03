@@ -8,8 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import model.Festa;
 import model.Inteira;
@@ -21,22 +19,19 @@ public class ControllerTelaFormaDePagamento {
     private AnchorPane anchorPaneTelaPagamento;
 
     @FXML
-    private ToggleGroup metodoPagamentoGroup;
-
-    @FXML
     private Button buttomFinalizar;
 
     @FXML
     private Button buttomVoltar;
 
     @FXML
-    private RadioButton radioButtonBoleto;
+    private Label labelBoleto;
 
     @FXML
-    private RadioButton radioButtonOutro;
+    private Label labelOutro;
 
-     @FXML
-    private RadioButton radioButtonPix;
+    @FXML
+    private Label labelPix;
 
     @FXML
     private Label labelValorTotal;
@@ -46,69 +41,42 @@ public class ControllerTelaFormaDePagamento {
 
     private Festa festa;
 
-    public void setFesta(Festa festa) {
-        this.festa = festa;
-        this.atualizarValorTotal(); 
-    }
-
-    private void atualizarValorTotal() {
-        if (festa == null || festa.getIngresso() == null) {
-            labelValorTotal.setText("N/A");
-            return;
-        }
-
-        String tipo= festa.getIngresso().getTipo();
-        double valorCalculado= 0;
-        
-        
-        if ("MEIA".equalsIgnoreCase(tipo) && festa.getIngresso() instanceof Meia) {
-            Meia meiaIngresso = (Meia) festa.getIngresso();
-            valorCalculado = meiaIngresso.calcularTotal();
-        } else if ("INTEIRA".equalsIgnoreCase(tipo) && festa.getIngresso() instanceof Inteira) {
-            Inteira inteiraIngresso = (Inteira) festa.getIngresso();
-            valorCalculado = inteiraIngresso.calcularTotal();
-        } else {
-            valorCalculado = festa.getIngresso().getValor() * festa.getIngresso().getQuantidade(); 
-        }
-        
-        labelValorTotal.setText(String.format("R$ %.2f", valorCalculado));
-    }
-
     @FXML
     void realizarCompra(ActionEvent event) {
-        
-        if (metodoPagamentoGroup.getSelectedToggle() == null) {
-            // Se nenhum RadioButton estiver selecionado
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Atenção");
-            alert.setHeaderText("Nenhum método foi selecionado.");
-            alert.setContentText("Por favor, selecione um método de pagamento para realizar compra.");
-            alert.showAndWait();
+        if (festa == null || festa.getIngresso() == null) {
+            labelValorTotal.setText(" N/A");
             return;
         }
 
-        RadioButton selectedRadioButton = (RadioButton) metodoPagamentoGroup.getSelectedToggle();
-        String metodo = selectedRadioButton.getText(); 
-        
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Sucesso");
-        alert.setHeaderText("Pagamento realizado!");
-        
-        if ("Pix".equalsIgnoreCase(metodo)) {
-            alert.setContentText("Obrigado pelo Pix! :).");
-        } else if ("Boleto".equalsIgnoreCase(metodo)) {
-            alert.setContentText("Lá vai mais um boleto!");
+        if ("Meia".equals(festa.getIngresso().getTipo()) && festa.getIngresso() instanceof Meia) {
+            Meia meiaIngresso = (Meia) festa.getIngresso();
+            labelValorTotal.setText(" " + meiaIngresso.calcularTotal());
+        } else if ("Inteira".equals(festa.getIngresso().getTipo()) && festa.getIngresso() instanceof Inteira) {
+            Inteira inteiraIngresso = (Inteira) festa.getIngresso();
+            labelValorTotal.setText(" " + inteiraIngresso.calcularTotal());
         } else {
-            alert.setContentText("Pagamento processado com sucesso via " + metodo + ".");
+            labelValorTotal.setText(" " + festa.getIngresso().getTipo());
         }
-        alert.showAndWait();
-        try {
-            trocarTela(anchorPaneTelaPagamento, "/View/TelaCliente.fxml");
-        } catch (IOException ex) {
-            System.err.println("Erro ao ir para tela do cliente. " + ex.getMessage());
-            ex.printStackTrace();
+
+        if (labelPix != null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Sucesso");
+                alert.setHeaderText("Pagamento realizado!");
+                alert.setContentText("Obrigado pelo Pix! :).");
+                alert.showAndWait();
+        }else if (labelBoleto !=null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Sucesso");
+                alert.setHeaderText("Pagamento realizado!");
+                alert.setContentText("Lá vai mais um boleto!");
+                alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Atenção");
+                alert.setHeaderText("Nenhum método foi selecionado.");
+                alert.setContentText("Por favor, selecione um método de pagamento para realizar compra.");
+                alert.showAndWait();
         }
-        
     }
 
     private void trocarTela(AnchorPane telaAtual, String caminhoNovaTelaFXML) throws IOException {

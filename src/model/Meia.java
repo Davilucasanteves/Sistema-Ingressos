@@ -3,9 +3,9 @@ package model;
 public class Meia extends Ingresso {
     private static final double DESCONTO = 0.50;
 
-    public Meia(double valor, int quantidade, String tipo) {
-        super(valor, quantidade, tipo);
-        super.setTipo("MEIA");
+    public Meia(Festa festa, double valor, int quantidade, String tipo) {
+        super(festa, valor, quantidade, tipo);
+        super.setTipo("Meia");
     }
 
     public double getDesconto() {
