@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class Festa implements Serializable {
-
+<<<<<<< HEAD
 
     private Ingresso ingresso;
     private String nome, data, descricao;
@@ -15,7 +15,7 @@ public class Festa implements Serializable {
         this.data = data;
         this.descricao = descricao;
         this.qtdIngresso = qtdIngresso;
-
+=======
     private Ingresso ingresso= new Ingresso(1,1,"n/a");
     private String nome, data, descricao;
     private int id;
